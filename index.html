@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Build Your Day</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* =========================================================================
+   BUILD YOUR DAY  —  kids' morning planner
+   ------------------------------------------------------------------------
+   👋 DAD: everything you'd want to change lives in the CONFIG block in the
+   <script> at the bottom of this file — your email, the kids, and every
+   menu option. You shouldn't need to touch anything up here.
+   ========================================================================= */
+:root{
+  --bg:#fff7ec;
+  --ink:#3a2c1e;
+  --soft:#7c6b58;
+  --card:#ffffff;
+  --line:#f0e2cf;
+  --coral:#ff6b4a;
+  --coral-deep:#e8492a;
+  --teal:#1fb5a3;
+  --sun:#ffc73a;
+  --grape:#7b6cf6;
+  --shadow:0 10px 30px rgba(160,110,60,.16);
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  font-family:'Nunito',sans-serif;
+  color:var(--ink);
+  background:
+    radial-gradient(1100px 520px at 50% -8%, rgba(255,199,58,.45), transparent 60%),
+    radial-gradient(800px 500px at 110% 10%, rgba(255,107,74,.20), transparent 55%),
+    radial-gradient(700px 500px at -10% 30%, rgba(31,181,163,.18), transparent 55%),
+    var(--bg);
+  min-height:100vh;
+  padding:24px 16px 80px;
+}
+.wrap{max-width:760px;margin:0 auto}
+header{text-align:center;margin:8px 0 22px;animation:drop .6s cubic-bezier(.2,.9,.3,1.2) both}
+.kicker{font-family:'Fredoka';font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--coral-deep);font-size:.8rem}
+h1{font-family:'Fredoka';font-weight:700;font-size:clamp(2.1rem,7vw,3.2rem);margin:.1em 0 .05em;line-height:1}
+.date{color:var(--soft);font-weight:700}
+
+/* screens */
+.screen{display:none;animation:fade .45s ease both}
+.screen.active{display:block}
+
+/* who-are-you */
+.who-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:22px}
+.who-btn{
+  border:3px solid var(--line);background:var(--card);border-radius:24px;padding:30px 16px;
+  font-family:'Fredoka';font-weight:700;font-size:1.6rem;color:var(--ink);cursor:pointer;
+  box-shadow:var(--shadow);transition:transform .15s, border-color .15s;
+}
+.who-btn .emoji{display:block;font-size:2.6rem;margin-bottom:6px}
+.who-btn:hover{transform:translateY(-4px) rotate(-1deg);border-color:var(--coral)}
+.who-btn:active{transform:scale(.97)}
+
+/* build screen */
+.greet{font-family:'Fredoka';font-weight:600;font-size:1.4rem;margin:6px 0 2px}
+.sub{color:var(--soft);font-weight:700;margin:0 0 18px}
+.locked{
+  display:flex;gap:10px;flex-wrap:wrap;background:rgba(255,255,255,.6);
+  border:2px dashed var(--line);border-radius:18px;padding:14px 16px;margin-bottom:22px;
+}
+.locked .ltitle{width:100%;font-family:'Fredoka';font-weight:600;color:var(--soft);font-size:.95rem;margin-bottom:2px}
+.chip{background:var(--sun);color:#5a4300;font-weight:800;border-radius:999px;padding:6px 13px;font-size:.92rem;display:inline-flex;gap:6px;align-items:center}
+
+.section{margin:0 0 20px;background:var(--card);border:2px solid var(--line);border-radius:22px;padding:18px 18px 8px;box-shadow:var(--shadow)}
+.section h2{font-family:'Fredoka';font-weight:700;font-size:1.18rem;margin:0 0 2px;display:flex;align-items:center;gap:8px}
+.counter{font-family:'Nunito';font-weight:800;font-size:.82rem;color:#fff;background:var(--coral);border-radius:999px;padding:2px 11px;margin-left:auto}
+.counter.done{background:var(--teal)}
+.section .hint{color:var(--soft);font-weight:700;font-size:.88rem;margin:0 0 12px}
+.opts{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;padding-bottom:10px}
+.opt{
+  position:relative;border:2.5px solid var(--line);background:#fffdf8;border-radius:16px;
+  padding:13px 12px 13px 12px;text-align:left;cursor:pointer;font-weight:700;color:var(--ink);
+  font-size:.98rem;transition:transform .12s, border-color .12s, background .12s;line-height:1.2;
+  display:flex;gap:9px;align-items:center;min-height:54px;
+}
+.opt .ic{font-size:1.3rem;flex:none}
+.opt .lk{display:block;font-size:.72rem;color:var(--teal);font-weight:800;margin-top:2px}
+.opt:hover{transform:translateY(-2px);border-color:var(--coral)}
+.opt:active{transform:scale(.98)}
+.opt.sel{background:var(--teal);border-color:var(--teal);color:#fff}
+.opt.sel .lk{color:#d8fff8}
+.opt.sel::after{content:"✓";position:absolute;top:-9px;right:-9px;background:var(--coral);color:#fff;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font-weight:900;box-shadow:0 3px 8px rgba(0,0,0,.18)}
+.opt.locked-out{opacity:.4;pointer-events:none}
+
+/* footer action */
+.cta-bar{position:sticky;bottom:14px;margin-top:24px;text-align:center}
+.btn{
+  font-family:'Fredoka';font-weight:700;border:none;border-radius:999px;cursor:pointer;
+  padding:16px 30px;font-size:1.15rem;color:#fff;background:var(--coral);
+  box-shadow:0 10px 24px rgba(232,73,42,.4);transition:transform .15s, opacity .15s;
+}
+.btn:hover{transform:translateY(-3px)}
+.btn:active{transform:scale(.97)}
+.btn[disabled]{background:#d9cab3;box-shadow:none;cursor:not-allowed;transform:none}
+.btn.ghost{background:#fff;color:var(--ink);border:2.5px solid var(--line);box-shadow:var(--shadow)}
+.btn.teal{background:var(--teal);box-shadow:0 10px 24px rgba(31,181,163,.4)}
+.btn-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+
+/* plan screen */
+.plan-card{background:var(--card);border:2px solid var(--line);border-radius:24px;padding:8px 6px;box-shadow:var(--shadow);margin-top:14px;overflow:hidden}
+.step{display:flex;gap:14px;align-items:flex-start;padding:14px 16px;border-bottom:2px solid var(--line)}
+.step:last-child{border-bottom:none}
+.step .num{flex:none;width:30px;height:30px;border-radius:50%;background:var(--grape);color:#fff;font-family:'Fredoka';font-weight:700;display:grid;place-items:center;font-size:.95rem}
+.step .body{flex:1}
+.step .t{font-family:'Fredoka';font-weight:600;font-size:1.05rem}
+.step .d{color:var(--soft);font-weight:700;font-size:.9rem}
+.step a{color:var(--teal);font-weight:800;text-decoration:none;border-bottom:2px solid rgba(31,181,163,.35)}
+.toast{margin:14px auto 0;max-width:520px;background:var(--teal);color:#fff;font-weight:800;border-radius:14px;padding:12px 16px;text-align:center;display:none}
+
+@keyframes drop{from{opacity:0;transform:translateY(-16px)}to{opacity:1;transform:none}}
+@keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@media (max-width:480px){.who-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="kicker">☀️ Good Morning</div>
+    <h1>Build Your Day</h1>
+    <div class="date" id="today"></div>
+  </header>
+
+  <!-- SCREEN 1: who -->
+  <section class="screen active" id="screen-who">
+    <p class="sub" style="text-align:center">Tap your name to start!</p>
+    <div class="who-grid" id="who-grid"></div>
+  </section>
+
+  <!-- SCREEN 2: build -->
+  <section class="screen" id="screen-build">
+    <div class="greet" id="greet"></div>
+    <p class="sub">Pick the things below to build your day. Some things are always included!</p>
+    <div class="locked" id="locked"></div>
+    <div id="sections"></div>
+    <div class="cta-bar">
+      <button class="btn" id="finish" disabled>Finish my day 🎉</button>
+    </div>
+  </section>
+
+  <!-- SCREEN 3: plan -->
+  <section class="screen" id="screen-plan">
+    <div class="greet" id="plan-greet"></div>
+    <p class="sub">Here's your plan! Send it to Dad so he can help you get going.</p>
+    <div class="plan-card" id="plan-card"></div>
+    <div class="toast" id="toast">Copied! Paste it into an email to Dad. 📋</div>
+    <div class="cta-bar">
+      <div class="btn-row">
+        <button class="btn" id="send">📧 Send my plan to Dad</button>
+        <button class="btn teal" id="copy">📋 Copy my plan</button>
+        <button class="btn ghost" id="restart">↺ Start over</button>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>
+/* =========================================================================
+   CONFIG  —  DAD, EDIT THIS PART
+   -------------------------------------------------------------------------
+   • dadEmail  : where "Send my plan to Dad" addresses the email.
+   • kids      : each kid's name + how they like to start the morning
+                 ("activity" or "schoolwork").
+   • Each menu item is either   "Some text"   or   {t:"Text", ic:"🎨"}
+     and may add a link:        {t:"Coding on Scratch", ic:"🧩", url:"https://scratch.mit.edu", lk:"scratch.mit.edu"}
+   • pick: how many a kid chooses from that menu.
+   ========================================================================= */
+const CONFIG = {
+  dadEmail: "REPLACE_WITH_YOUR_EMAIL@gmail.com",
+
+  kids: {
+    gage:  { name:"Gage",  emoji:"🚀", startsWith:"activity"   },
+    siena: { name:"Siena", emoji:"🌸", startsWith:"schoolwork" }
+  },
+
+  // Always included (shown as locked-in chips)
+  alwaysIncluded: [
+    { t:"Make bed & tidy room", ic:"🛏️" },
+    { t:"Breakfast", ic:"🥣" },
+    { t:"30 min free time", ic:"⭐" },
+    { t:"Bible time (NKJV)", ic:"📖" }
+  ],
+
+  // Schoolwork is included too — Dad can trim today's subjects here.
+  schoolwork: [
+    { t:"Math", ic:"➗", url:"https://www.khanacademy.org", lk:"Khan Academy" },
+    { t:"Reading", ic:"📚", url:"https://www.khanacademy.org", lk:"Khan Academy" },
+    { t:"Critical thinking", ic:"🧠" }
+  ],
+
+  // Choice menus
+  menus: {
+    chore:    { title:"Chore", ic:"🧹", pick:1, hint:"Pick 1 job to help out.", items:[
+      {t:"Kitchen help (dishes, wipe counters)", ic:"🍽️"},
+      {t:"Laundry (sort & fold)", ic:"🧺"},
+      {t:"Lawn / yard help", ic:"🌿"},
+      {t:"Vacuum or sweep", ic:"🧽"},
+      {t:"Tidy a room", ic:"🧸"},
+      {t:"Take out trash / recycling", ic:"🗑️"},
+      {t:"Organize a space", ic:"📦"}
+    ]},
+    exercise: { title:"Move your body", ic:"💪", pick:1, hint:"Pick 1 way to get moving.", items:[
+      {t:"Bike riding", ic:"🚲"},
+      {t:"Push-ups & sit-ups", ic:"🤸"},
+      {t:"Karate practice", ic:"🥋"},
+      {t:"Jumping jacks", ic:"⭐"},
+      {t:"Run or walk", ic:"🏃"},
+      {t:"Play a sport", ic:"⚽"},
+      {t:"Stretching / yoga", ic:"🧘"},
+      {t:"Dance", ic:"🎶"}
+    ]},
+    morning:  { title:"Morning activities", ic:"🎨", pick:2, hint:"Pick 2 fun things for the morning.", items:[
+      {t:"Drawing / painting", ic:"🖌️"},
+      {t:"Lego / building", ic:"🧱"},
+      {t:"Build an obstacle course", ic:"🏗️"},
+      {t:"Imaginative play", ic:"🦖"},
+      {t:"Crafts / make something", ic:"✂️"},
+      {t:"Science experiment", ic:"🔬"},
+      {t:"Music / learn a song", ic:"🎹"},
+      {t:"Outdoor exploration", ic:"🌳"}
+    ]},
+    afternoon:{ title:"Afternoon (on your own)", ic:"🌤️", pick:2, hint:"Dad's working — pick 2 you can do by yourself.", items:[
+      {t:"Write or draw a story", ic:"✏️"},
+      {t:"Jigsaw or brain-teaser", ic:"🧩"},
+      {t:"Build a fort or marble run", ic:"🏰"},
+      {t:"Read or listen to a book", ic:"📕"},
+      {t:"Typing practice", ic:"⌨️", url:"https://www.typingclub.com", lk:"TypingClub"},
+      {t:"Coding on Scratch", ic:"🐱", url:"https://scratch.mit.edu", lk:"scratch.mit.edu"},
+      {t:"Coding on Code.org", ic:"💻", url:"https://code.org", lk:"code.org"},
+      {t:"Explore science & animals", ic:"🦁", url:"https://kids.nationalgeographic.com", lk:"Nat Geo Kids"},
+      {t:"Organize a collection", ic:"🗂️"},
+      {t:"Journal about your day", ic:"📓"}
+    ]},
+    downtime: { title:"Relax / downtime", ic:"🛋️", pick:1, hint:"Pick 1 way to chill.", items:[
+      {t:"Watch a movie (+report = bonus!)", ic:"🎬"},
+      {t:"Read for fun", ic:"📖"},
+      {t:"Audiobook or podcast", ic:"🎧"},
+      {t:"Quiet drawing", ic:"🖍️"},
+      {t:"Listen to music", ic:"🎵"},
+      {t:"Board game or puzzle", ic:"🎲"}
+    ]}
+  }
+};
+
+/* ===================== app logic (no need to edit) ===================== */
+const norm = x => typeof x === "string" ? {t:x} : x;
+const $ = s => document.querySelector(s);
+let kidKey = null;
+const picks = { chore:[], exercise:[], morning:[], afternoon:[], downtime:[] };
+const order = ["chore","exercise","morning","afternoon","downtime"];
+
+const dateStr = new Date().toLocaleDateString(undefined,{weekday:"long",month:"long",day:"numeric"});
+$("#today").textContent = dateStr;
+
+// build "who" screen
+const whoGrid = $("#who-grid");
+Object.entries(CONFIG.kids).forEach(([k,v])=>{
+  const b=document.createElement("button");
+  b.className="who-btn";
+  b.innerHTML=`<span class="emoji">${v.emoji||"🙂"}</span>${v.name}`;
+  b.onclick=()=>startBuild(k);
+  whoGrid.appendChild(b);
+});
+
+function show(id){document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));$(id).classList.add("active");window.scrollTo({top:0,behavior:"smooth"});}
+
+function startBuild(k){
+  kidKey=k;
+  order.forEach(o=>picks[o]=[]);
+  const kid=CONFIG.kids[k];
+  $("#greet").textContent=`Hi ${kid.name}! ${kid.emoji||""}`;
+  // locked chips
+  const locked=$("#locked");
+  const always=[...CONFIG.alwaysIncluded.map(norm), ...CONFIG.schoolwork.map(norm)];
+  locked.innerHTML=`<div class="ltitle">Always part of your day:</div>`+
+    always.map(i=>`<span class="chip">${i.ic||"✅"} ${i.t}</span>`).join("");
+  // sections
+  const wrap=$("#sections");wrap.innerHTML="";
+  order.forEach(key=>{
+    const m=CONFIG.menus[key];
+    const sec=document.createElement("div");sec.className="section";sec.dataset.key=key;
+    sec.innerHTML=`<h2>${m.ic} ${m.title}<span class="counter" id="c-${key}"></span></h2>
+                   <p class="hint">${m.hint}</p><div class="opts" id="o-${key}"></div>`;
+    wrap.appendChild(sec);
+    const opts=sec.querySelector(`#o-${key}`);
+    m.items.map(norm).forEach((item,idx)=>{
+      const o=document.createElement("button");o.className="opt";o.dataset.idx=idx;
+      o.innerHTML=`<span class="ic">${item.ic||"•"}</span><span>${item.t}${item.lk?`<span class="lk">↗ ${item.lk}</span>`:""}</span>`;
+      o.onclick=()=>toggle(key,idx,o);
+      opts.appendChild(o);
+    });
+    updateCounter(key);
+  });
+  $("#finish").disabled=true;
+  show("#screen-build");
+}
+
+function toggle(key,idx,el){
+  const m=CONFIG.menus[key];const arr=picks[key];const pos=arr.indexOf(idx);
+  if(pos>-1){arr.splice(pos,1);el.classList.remove("sel");}
+  else{ if(arr.length>=m.pick) return; arr.push(idx);el.classList.add("sel"); }
+  updateCounter(key);refreshLockouts(key);checkDone();
+}
+
+function refreshLockouts(key){
+  const m=CONFIG.menus[key];const full=picks[key].length>=m.pick;
+  document.querySelectorAll(`#o-${key} .opt`).forEach(o=>{
+    const sel=o.classList.contains("sel");
+    o.classList.toggle("locked-out",full&&!sel);
+  });
+}
+
+function updateCounter(key){
+  const m=CONFIG.menus[key];const n=picks[key].length;const c=$("#c-"+key);
+  const left=m.pick-n;
+  if(left<=0){c.textContent="all set ✓";c.classList.add("done");}
+  else{c.textContent=`pick ${m.pick} · ${left} to go`;c.classList.remove("done");}
+}
+
+function checkDone(){
+  const done=order.every(k=>picks[k].length===CONFIG.menus[k].pick);
+  $("#finish").disabled=!done;
+}
+
+$("#finish").onclick=()=>buildPlan();
+
+function itemOf(key,idx){return norm(CONFIG.menus[key].items[idx]);}
+
+function buildPlan(){
+  const kid=CONFIG.kids[kidKey];
+  const steps=[];
+  steps.push({t:"Wake up & morning basics",d:"Make your bed, get dressed, tidy your room, breakfast."});
+  steps.push({t:"Free time",d:"About 30 minutes — your choice."});
+  steps.push({t:"Bible time",d:"A short reading + memory verse (NKJV)."});
+
+  const school={t:"Schoolwork",d:"Today's subjects:",subs:CONFIG.schoolwork.map(norm)};
+  const morning=picks.morning.map(i=>({...itemOf("morning",i)}));
+  const m1={t:"Activity: "+morning[0].t,item:morning[0]};
+  const m2={t:"Activity: "+morning[1].t,item:morning[1]};
+
+  if(kid.startsWith==="activity"){steps.push(m1,m2,school);}
+  else{steps.push(school,m1,m2);}
+
+  const chore=itemOf("chore",picks.chore[0]);
+  const ex=itemOf("exercise",picks.exercise[0]);
+  steps.push({t:"Chore: "+chore.t,item:chore});
+  steps.push({t:"Exercise: "+ex.t,item:ex});
+  steps.push({t:"Lunch 🥪"});
+
+  picks.afternoon.forEach(i=>{const a=itemOf("afternoon",i);steps.push({t:"Afternoon: "+a.t,item:a,d:"You can do this on your own."});});
+  const dt=itemOf("downtime",picks.downtime[0]);
+  steps.push({t:"Downtime: "+dt.t,item:dt});
+  steps.push({t:"Wrap up the day",d:"Check off what you did, set a goal for tomorrow, tell Dad your win!"});
+
+  // render
+  $("#plan-greet").textContent=`${kid.name}'s Day — ${dateStr}`;
+  const card=$("#plan-card");card.innerHTML="";
+  steps.forEach((s,i)=>{
+    let extra="";
+    if(s.subs){extra=`<div class="d">`+s.subs.map(x=>x.url?`<a href="${x.url}" target="_blank" rel="noopener">${x.t} ↗</a>`:x.t).join(" · ")+`</div>`;}
+    else if(s.item&&s.item.url){extra=`<div class="d"><a href="${s.item.url}" target="_blank" rel="noopener">Open ${s.item.lk||s.item.t} ↗</a></div>`;}
+    else if(s.d){extra=`<div class="d">${s.d}</div>`;}
+    const div=document.createElement("div");div.className="step";
+    div.innerHTML=`<div class="num">${i+1}</div><div class="body"><div class="t">${s.t}</div>${extra}</div>`;
+    card.appendChild(div);
+  });
+  window._planText=planText(kid,steps);
+  show("#screen-plan");
+}
+
+function planText(kid,steps){
+  let out=`${kid.name}'s Day Plan — ${dateStr}\n\n`;
+  steps.forEach((s,i)=>{
+    out+=`${i+1}. ${s.t}\n`;
+    if(s.subs)out+=`   ${s.subs.map(x=>x.url?`${x.t} (${x.url})`:x.t).join(", ")}\n`;
+    else if(s.item&&s.item.url)out+=`   ${s.item.url}\n`;
+  });
+  out+=`\nMade by ${kid.name} on Build Your Day ☀️`;
+  return out;
+}
+
+$("#send").onclick=()=>{
+  const kid=CONFIG.kids[kidKey];
+  const subject=`${kid.name}'s Day Plan — ${dateStr}`;
+  const url=`mailto:${encodeURIComponent(CONFIG.dadEmail)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(window._planText)}`;
+  window.location.href=url;
+};
+$("#copy").onclick=async()=>{
+  try{await navigator.clipboard.writeText(window._planText);}
+  catch(e){}
+  const t=$("#toast");t.style.display="block";setTimeout(()=>t.style.display="none",2600);
+};
+$("#restart").onclick=()=>{kidKey=null;show("#screen-who");};
+</script>
+</body>
+</html>
