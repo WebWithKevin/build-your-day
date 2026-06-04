@@ -1,0 +1,18 @@
+{
+  "kid": "gage",
+  "date": "2026-06-04",
+  "displayDate": "Thursday, June 4, 2026",
+  "subject": "critical-thinking",
+  "subjectLabel": "Brain Workout",
+  "subjectIcon": "🧠",
+  "level": "On-level",
+  "theme": "robots",
+  "instructions": "Take your time. Show your thinking when it helps.",
+  "questions": [
+    { "id": "pattern", "prompt": "Pattern. A robot factory makes parts in a sequence: 2, 6, 12, 20, 30, ____. What number comes next, and why?", "lines": 3 },
+    { "id": "logic",   "prompt": "Logic. Three robots — Sam, Theo, and Owen — were built in order. Sam was built before Theo. Owen was built after Theo. List them from oldest to newest.", "lines": 2 },
+    { "id": "riddle",  "prompt": "Riddle. I have keys but open no locks. I have space but no room. You can enter, but you can’t go inside. What am I?", "lines": 1 },
+    { "id": "strategy","prompt": "Strategy. A repair-bot is at the bottom of a 12-foot maintenance shaft. Each day it climbs 4 feet up, but each night it slides 2 feet back. How many days until it reaches the top? (Hint: think about the last day — does it slide back after it gets out?)", "lines": 3 },
+    { "id": "scenario","prompt": "What would you do? Your friend wants you to skip your chore to come ride bikes with him. What would you say, and why? (2–3 sentences.)", "lines": 5 }
+  ]
+}

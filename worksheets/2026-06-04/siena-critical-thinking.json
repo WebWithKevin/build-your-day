@@ -1,0 +1,18 @@
+{
+  "kid": "siena",
+  "date": "2026-06-04",
+  "displayDate": "Thursday, June 4, 2026",
+  "subject": "critical-thinking",
+  "subjectLabel": "Brain Workout",
+  "subjectIcon": "🧠",
+  "level": "On-level",
+  "theme": "unicorns",
+  "instructions": "Take your time. Show your thinking when it helps.",
+  "questions": [
+    { "id": "pattern", "prompt": "Pattern. A unicorn herd grew in groups: 1, 4, 9, 16, 25, ____. What number comes next, and why?", "lines": 3 },
+    { "id": "logic",   "prompt": "Logic. Three friends — Ava, Ben, and Cleo — each have a different magical pet: a cat, a dog, and a rabbit. Ava does NOT have the dog. Cleo has the rabbit. Who has which pet?", "lines": 3 },
+    { "id": "riddle",  "prompt": "Riddle. The more you take, the more you leave behind. What am I?", "lines": 1 },
+    { "id": "strategy","prompt": "Strategy. You want to share 5 unicorn-shaped cookies equally with 2 friends (3 people total, including you). Each person should get the same amount. How would you do it? Describe your plan.", "lines": 4 },
+    { "id": "scenario","prompt": "What would you do? You see your friend take an extra cookie at snack time when she was only supposed to take one. What would you do, and why? (2–3 sentences.)", "lines": 5 }
+  ]
+}
