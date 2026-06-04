@@ -6,127 +6,27 @@
   "theme": "robots",
   "dailyGoal": {
     "headline": "Write a complete story with a beginning, middle, and end.",
-    "explainer": "A clear start, something exciting in the middle, and an ending that wraps it up."
+    "explainer": "A clear start, something exciting in the middle, and an ending that wraps it up.",
+    "starterIdea": "What about a robot inventor named Bolt who tries to teach himself to draw — and keeps getting it wrong until he tries one weird trick?"
   },
   "anchors": [
-    {
-      "id": "breakfast",
-      "time": "09:00",
-      "endTime": "09:30",
-      "label": "Breakfast",
-      "icon": "🥣",
-      "sharedWith": "family"
-    },
-    {
-      "id": "bible",
-      "time": "10:20",
-      "endTime": "10:40",
-      "label": "Bible time",
-      "icon": "📖",
-      "sharedWith": "Siena",
-      "meetUrl": "https://meet.google.com/new"
-    },
-    {
-      "id": "lawn",
-      "time": "12:50",
-      "endTime": "13:10",
-      "label": "Chore: Lawn / yard help",
-      "icon": "🌿",
-      "withDad": true,
-      "sharedWith": "Siena"
-    },
-    {
-      "id": "karate",
-      "time": "13:10",
-      "endTime": "13:35",
-      "label": "Karate practice",
-      "icon": "🥋"
-    },
-    {
-      "id": "lunch",
-      "time": "13:35",
-      "endTime": "14:20",
-      "label": "Lunch",
-      "icon": "🥪",
-      "sharedWith": "family"
-    },
-    {
-      "id": "snack",
-      "time": "15:05",
-      "endTime": "15:20",
-      "label": "Afternoon snack",
-      "icon": "🍎",
-      "sharedWith": "family"
-    },
-    {
-      "id": "movie",
-      "time": "15:50",
-      "endTime": "17:20",
-      "label": "Movie + report (bonus!)",
-      "icon": "🎬",
-      "sharedWith": "Siena"
-    },
-    {
-      "id": "dinner",
-      "time": "17:30",
-      "endTime": "18:15",
-      "label": "Dinner",
-      "icon": "🍝",
-      "sharedWith": "family"
-    }
+    { "id": "breakfast", "time": "09:00", "endTime": "09:30", "label": "Breakfast", "icon": "🥣", "sharedWith": "family" },
+    { "id": "bible", "time": "10:20", "endTime": "10:40", "label": "Bible time", "icon": "📖", "sharedWith": "Siena", "meetUrl": "https://meet.google.com/new" },
+    { "id": "lawn", "time": "12:50", "endTime": "13:10", "label": "Chore: Lawn / yard help", "icon": "🌿", "withDad": true, "sharedWith": "Siena" },
+    { "id": "karate", "time": "13:10", "endTime": "13:35", "label": "Karate practice", "icon": "🥋" },
+    { "id": "lunch", "time": "13:35", "endTime": "14:20", "label": "Lunch", "icon": "🥪", "sharedWith": "family" },
+    { "id": "snack", "time": "15:05", "endTime": "15:20", "label": "Afternoon snack", "icon": "🍎", "sharedWith": "family" },
+    { "id": "movie", "time": "15:50", "endTime": "17:20", "label": "Movie + report (bonus!)", "icon": "🎬", "sharedWith": "Siena" },
+    { "id": "dinner", "time": "17:30", "endTime": "18:15", "label": "Dinner", "icon": "🍝", "sharedWith": "family" }
   ],
   "workItems": [
-    {
-      "id": "drawing",
-      "label": "Drawing / painting",
-      "icon": "🖌️"
-    },
-    {
-      "id": "imaginative",
-      "label": "Imaginative play",
-      "icon": "🦖"
-    },
-    {
-      "id": "math",
-      "label": "Math",
-      "icon": "➗",
-      "link": "https://www.khanacademy.org",
-      "linkLabel": "Open Khan Academy",
-      "estimatedTime": "25 min"
-    },
-    {
-      "id": "reading",
-      "label": "Reading",
-      "icon": "📚",
-      "link": "https://www.khanacademy.org",
-      "linkLabel": "Open Khan Academy",
-      "estimatedTime": "25 min"
-    },
-    {
-      "id": "critical-thinking",
-      "label": "Critical thinking worksheet",
-      "icon": "🧠",
-      "link": "worksheet.html?kid=gage&date=2026-06-03&subject=critical-thinking",
-      "linkLabel": "Open worksheet",
-      "estimatedTime": "20 min"
-    },
-    {
-      "id": "story",
-      "label": "Write or draw a story",
-      "icon": "✏️",
-      "isDailyGoal": true,
-      "estimatedTime": "45 min"
-    },
-    {
-      "id": "typing",
-      "label": "Typing practice",
-      "icon": "⌨️",
-      "link": "https://www.typingclub.com",
-      "linkLabel": "Open TypingClub",
-      "estimatedTime": "30 min"
-    }
+    { "id": "drawing", "label": "Drawing / painting", "icon": "🖌️" },
+    { "id": "imaginative", "label": "Imaginative play", "icon": "🦖" },
+    { "id": "math", "label": "Math", "icon": "➗", "link": "https://www.khanacademy.org", "linkLabel": "Khan Academy", "estimatedTime": "25 min" },
+    { "id": "reading", "label": "Reading", "icon": "📚", "link": "https://www.khanacademy.org", "linkLabel": "Khan Academy", "estimatedTime": "25 min" },
+    { "id": "critical-thinking", "label": "Critical thinking worksheet", "icon": "🧠", "link": "worksheet.html?kid=gage&date=2026-06-03&subject=critical-thinking", "linkLabel": "Open worksheet", "estimatedTime": "20 min" },
+    { "id": "story", "label": "Write or draw a story", "icon": "✏️", "isDailyGoal": true, "estimatedTime": "45 min" },
+    { "id": "typing", "label": "Typing practice", "icon": "⌨️", "link": "https://www.typingclub.com", "linkLabel": "TypingClub", "estimatedTime": "30 min" }
   ],
-  "wrapUp": {
-    "dadSignature": true
-  }
+  "wrapUp": { "dadSignature": true }
 }
