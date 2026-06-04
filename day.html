@@ -515,6 +515,7 @@ function render(){
 
   html += '<div class="footer-actions">';
   html += '<button class="btn ghost" onclick="window.print()">🖨️ Print</button>';
+  html += '<button class="btn ghost" onclick="resetDay()">↻ Reset day</button>';
   html += '<a class="btn ghost" href="index.html?kid='+kid+'">↺ Build a new day</a>';
   html += '</div>';
 
@@ -712,6 +713,12 @@ function showDayCompleteModal(){
 }
 function closeDayCompleteModal(){
   document.getElementById("day-complete-modal").classList.remove("show");
+}
+
+function resetDay(){
+  if(!confirm("Reset everything for today? All your checks and progress will be cleared.")) return;
+  try{ localStorage.removeItem(stateKey); } catch(e){}
+  window.location.reload();
 }
 
 function sendWrapUp(){
