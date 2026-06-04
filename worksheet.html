@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Worksheet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fff7ec;
+  --ink:#3a2c1e;
+  --soft:#7c6b58;
+  --card:#ffffff;
+  --line:#f0e2cf;
+  --accent:#ff6b4a;
+  --accent-deep:#e8492a;
+  --teal:#1fb5a3;
+  --sun:#ffc73a;
+  --shadow:0 10px 30px rgba(160,110,60,.16);
+  --radius-card:22px;
+  --radius-btn:999px;
+  --display-font:'Fredoka';
+  --display-weight:700;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  font-family:'Nunito',sans-serif;
+  color:var(--ink);
+  background:
+    radial-gradient(1100px 520px at 50% -8%, rgba(255,199,58,.45), transparent 60%),
+    radial-gradient(800px 500px at 110% 10%, rgba(255,107,74,.20), transparent 55%),
+    radial-gradient(700px 500px at -10% 30%, rgba(31,181,163,.18), transparent 55%),
+    var(--bg);
+  min-height:100vh;padding:24px 16px 80px;
+}
+.wrap{max-width:760px;margin:0 auto}
+header{text-align:center;margin:8px 0 22px}
+.kicker{font-family:var(--display-font);font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-deep);font-size:.8rem}
+h1{font-family:var(--display-font);font-weight:var(--display-weight);font-size:clamp(1.8rem,5vw,2.4rem);margin:.1em 0 .05em;line-height:1.1;display:flex;align-items:center;justify-content:center;gap:10px}
+.sub{color:var(--soft);font-weight:700;font-size:.95rem;margin-top:6px}
+.theme-chip{display:inline-block;background:var(--sun);color:#5a4300;font-weight:800;padding:3px 12px;border-radius:999px;font-size:.85rem;margin-top:6px}
+
+.section{margin:0 0 22px;background:var(--card);border:2px solid var(--line);border-radius:var(--radius-card);padding:22px 22px 18px;box-shadow:var(--shadow)}
+.passage h2{font-family:var(--display-font);font-weight:var(--display-weight);margin:0 0 10px;font-size:1.15rem}
+.passage p{font-size:1.02rem;line-height:1.65;margin:0 0 12px}
+
+.instructions{font-weight:700;color:var(--soft);font-size:.92rem;margin:0 0 18px;padding-bottom:14px;border-bottom:2px dashed var(--line)}
+
+.q{margin:0 0 22px}
+.q .num{font-family:var(--display-font);font-weight:var(--display-weight);color:var(--accent-deep);font-size:1.05rem;display:inline-block;margin-right:8px}
+.q .prompt{font-weight:700;font-size:1rem;line-height:1.4;display:inline}
+.q .room{margin-top:10px;display:flex;flex-direction:column;gap:0}
+.q .room textarea{
+  width:100%;padding:10px 12px;font-size:.95rem;font-family:'Nunito';font-weight:600;
+  border:2px solid var(--line);border-radius:12px;background:#fffdf8;color:var(--ink);resize:vertical;
+}
+.q .room textarea:focus{outline:none;border-color:var(--accent)}
+.q .room.lines-1 textarea{min-height:36px}
+.q .room.lines-2 textarea{min-height:60px}
+.q .room.lines-3 textarea{min-height:90px}
+.q .room.lines-5 textarea{min-height:140px}
+
+.print-lines{display:none}
+@media print{
+  .print-lines{display:block;border-top:2px solid var(--line);height:24px;margin-top:6px}
+  .q .room.lines-1{height:34px}
+  .q .room.lines-2{height:64px}
+  .q .room.lines-3{height:96px}
+  .q .room.lines-5{height:160px}
+  textarea{display:none}
+  .q .room::before{content:"";display:block;border-bottom:1.5px solid #999;margin-top:14px}
+  .q .room::after{content:"";display:block;border-bottom:1.5px solid #999;margin-top:24px}
+  .q .room.lines-3::after, .q .room.lines-5::after{content:"";display:block;border-bottom:1.5px solid #999;margin-top:24px}
+}
+
+.footer-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:30px}
+.btn{
+  font-family:var(--display-font);font-weight:var(--display-weight);border:none;border-radius:var(--radius-btn);cursor:pointer;
+  padding:14px 26px;font-size:1.05rem;color:#fff;background:var(--accent);text-decoration:none;display:inline-flex;align-items:center;gap:8px;
+  box-shadow:0 8px 20px rgba(232,73,42,.35);transition:transform .15s;
+}
+.btn:hover{transform:translateY(-2px)}
+.btn.ghost{background:#fff;color:var(--ink);border:2.5px solid var(--line);box-shadow:var(--shadow)}
+
+.state-msg{text-align:center;padding:60px 20px;color:var(--soft);font-weight:700}
+.state-msg h2{font-family:var(--display-font);font-weight:var(--display-weight);color:var(--ink);margin:0 0 10px}
+
+body.theme-gage{
+  --accent:#ff5a36;
+  --accent-deep:#c2330f;
+  --radius-card:14px;
+  --radius-btn:10px;
+  background:
+    radial-gradient(1100px 520px at 50% -8%, rgba(255,90,54,.4), transparent 60%),
+    radial-gradient(800px 500px at 110% 10%, rgba(37,99,235,.18), transparent 55%),
+    radial-gradient(700px 500px at -10% 30%, rgba(31,181,163,.15), transparent 55%),
+    var(--bg);
+}
+body.theme-siena{
+  --accent:#ec4899;
+  --accent-deep:#be185d;
+  --sun:#ffd166;
+  --radius-card:28px;
+  --radius-btn:999px;
+  --display-font:'Quicksand';
+  --display-weight:600;
+  background:
+    radial-gradient(1100px 520px at 50% -8%, rgba(236,72,153,.32), transparent 60%),
+    radial-gradient(800px 500px at 110% 10%, rgba(167,139,250,.20), transparent 55%),
+    radial-gradient(700px 500px at -10% 30%, rgba(31,181,163,.18), transparent 55%),
+    var(--bg);
+}
+
+@media print{
+  body{background:#fff;padding:20px;color:#000}
+  .footer-actions{display:none !important}
+  .section{box-shadow:none;border:1.5px solid #999;break-inside:avoid}
+  .q{break-inside:avoid;page-break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="wrap" id="root">
+  <div class="state-msg"><h2>Loading worksheet&hellip;</h2></div>
+</div>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+const kid = (params.get("kid") || "").toLowerCase();
+const date = params.get("date") || todayISO();
+const subject = (params.get("subject") || "").toLowerCase();
+const root = document.getElementById("root");
+let wsData = null;
+let stateKey = "";
+
+function todayISO(){
+  const d = new Date();
+  return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
+}
+function err(t, s){
+  root.innerHTML = '<div class="state-msg"><h2>'+t+'</h2><p>'+(s||"")+'</p>'+
+    '<p style="margin-top:20px"><a class="btn ghost" href="day.html?kid='+kid+'&date='+date+'">← Back to today’s plan</a></p></div>';
+}
+
+if(!kid || !["gage","siena"].includes(kid)){
+  err("Whose worksheet?", "Try opening from your day plan.");
+} else if(!subject){
+  err("Which subject?", "Missing subject in URL.");
+} else {
+  document.body.classList.add("theme-"+kid);
+  stateKey = "wsState:"+date+":"+kid+":"+subject;
+  loadWorksheet();
+}
+
+async function loadWorksheet(){
+  try{
+    const res = await fetch("worksheets/"+date+"/"+kid+"-"+subject+".json", {cache:"no-store"});
+    if(!res.ok) throw new Error();
+    wsData = await res.json();
+    render();
+  } catch(e){
+    err("Worksheet not ready yet 🌱", "Ask Dad to build it. ("+date+" · "+kid+" · "+subject+")");
+  }
+}
+
+function loadState(){ try{ return JSON.parse(localStorage.getItem(stateKey)||"{}"); } catch(e){ return {}; } }
+function saveState(s){ try{ localStorage.setItem(stateKey, JSON.stringify(s)); } catch(e){} }
+
+function render(){
+  const state = loadState();
+  const kidEmojis = { gage:"🚀", siena:"🌸" };
+  const kemoji = kidEmojis[kid];
+  const themeChip = wsData.theme ? '<div class="theme-chip">today’s theme: '+esc(wsData.theme)+'</div>' : '';
+  let html = '';
+
+  html += '<header>';
+  html += '<div class="kicker">'+esc(wsData.subjectIcon||"")+' '+esc(wsData.subjectLabel||subject)+' worksheet</div>';
+  html += '<h1>'+kemoji+' '+cap(kid)+'</h1>';
+  html += '<div class="sub">'+esc(wsData.displayDate || date)+(wsData.level? " · "+esc(wsData.level) : "")+'</div>';
+  html += themeChip;
+  html += '</header>';
+
+  if(wsData.passage){
+    html += '<section class="section passage">';
+    if(wsData.passage.title) html += '<h2>'+esc(wsData.passage.title)+'</h2>';
+    const paragraphs = (wsData.passage.text||"").split(/\n\n+/);
+    paragraphs.forEach(function(p){ html += '<p>'+esc(p)+'</p>'; });
+    html += '</section>';
+  }
+
+  if(wsData.instructions){
+    html += '<section class="section">';
+    html += '<p class="instructions">'+esc(wsData.instructions)+'</p>';
+    (wsData.questions||[]).forEach(function(q, i){ html += renderQ(q, i+1, state); });
+    html += '</section>';
+  } else {
+    html += '<section class="section">';
+    (wsData.questions||[]).forEach(function(q, i){ html += renderQ(q, i+1, state); });
+    html += '</section>';
+  }
+
+  html += '<div class="footer-actions">';
+  html += '<button class="btn" onclick="window.print()">🖨️ Print</button>';
+  html += '<a class="btn ghost" href="day.html?kid='+kid+'&date='+date+'">← Back to today’s plan</a>';
+  html += '</div>';
+
+  root.innerHTML = html;
+
+  document.querySelectorAll("textarea[data-qid]").forEach(function(ta){
+    const qid = ta.dataset.qid;
+    ta.value = state[qid] || "";
+    ta.addEventListener("input", function(){
+      const s = loadState();
+      s[qid] = ta.value;
+      saveState(s);
+    });
+  });
+}
+
+function renderQ(q, n, state){
+  const lines = q.lines || 3;
+  return '<div class="q">'+
+    '<div><span class="num">'+n+'.</span><span class="prompt">'+esc(q.prompt)+'</span></div>'+
+    '<div class="room lines-'+lines+'"><textarea data-qid="'+esc(q.id||("q"+n))+'" placeholder="Write your answer…"></textarea></div>'+
+    '</div>';
+}
+
+function cap(s){ return s ? s.charAt(0).toUpperCase()+s.slice(1) : ""; }
+function esc(s){ return String(s==null?"":s).replace(/[&<>"']/g, function(c){ return ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"})[c]; }); }
+</script>
+</body>
+</html>

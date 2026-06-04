@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Today's day</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+/* =========================================================================
+   DAY VIEW  —  kid's daily plan, hybrid kanban
+   ------------------------------------------------------------------------
+   DAD: this page is data-driven. To change a day, edit the JSON in
+   /days/<YYYY-MM-DD>/<kid>.json. Per-kid theme overrides at the bottom.
+   ========================================================================= */
+:root{
+  --bg:#fff7ec;
+  --ink:#3a2c1e;
+  --soft:#7c6b58;
+  --card:#ffffff;
+  --line:#f0e2cf;
+  --accent:#ff6b4a;
+  --accent-deep:#e8492a;
+  --teal:#1fb5a3;
+  --sun:#ffc73a;
+  --grape:#7b6cf6;
+  --shadow:0 10px 30px rgba(160,110,60,.16);
+  --radius-card:22px;
+  --radius-btn:999px;
+  --display-font:'Fredoka';
+  --display-weight:700;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  font-family:'Nunito',sans-serif;
+  color:var(--ink);
+  background:
+    radial-gradient(1100px 520px at 50% -8%, rgba(255,199,58,.45), transparent 60%),
+    radial-gradient(800px 500px at 110% 10%, rgba(255,107,74,.20), transparent 55%),
+    radial-gradient(700px 500px at -10% 30%, rgba(31,181,163,.18), transparent 55%),
+    var(--bg);
+  min-height:100vh;
+  padding:24px 16px 80px;
+}
+.wrap{max-width:980px;margin:0 auto}
+header{text-align:center;margin:8px 0 22px;animation:drop .6s cubic-bezier(.2,.9,.3,1.2) both}
+.kicker{font-family:var(--display-font);font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-deep);font-size:.8rem}
+h1{font-family:var(--display-font);font-weight:var(--display-weight);font-size:clamp(2.1rem,6vw,3rem);margin:.1em 0 .05em;line-height:1;display:flex;align-items:center;justify-content:center;gap:12px}
+h1 .kemoji{font-size:.9em}
+.date{color:var(--soft);font-weight:700;font-size:1rem}
+
+.goal-card{
+  background:var(--card);border:2px solid var(--line);border-radius:var(--radius-card);
+  padding:18px 20px;box-shadow:var(--shadow);margin:0 0 22px;border-left:6px solid var(--sun);
+}
+.goal-label{font-family:var(--display-font);font-weight:600;color:var(--soft);font-size:.85rem;text-transform:uppercase;letter-spacing:.08em;display:flex;align-items:center;gap:6px}
+.goal-headline{font-family:var(--display-font);font-weight:var(--display-weight);font-size:1.25rem;color:var(--ink);margin:6px 0}
+.goal-explainer{color:var(--soft);font-weight:600;font-size:.95rem;line-height:1.4}
+
+.section{margin:0 0 22px;background:var(--card);border:2px solid var(--line);border-radius:var(--radius-card);padding:18px 18px 14px;box-shadow:var(--shadow)}
+.section h2{font-family:var(--display-font);font-weight:var(--display-weight);font-size:1.2rem;margin:0 0 4px;display:flex;align-items:center;gap:10px}
+.section .hint{color:var(--soft);font-weight:700;font-size:.88rem;margin:0 0 14px}
+
+.anchor-list{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px}
+.anchor{
+  display:flex;align-items:center;gap:10px;background:#fffdf8;border:2px solid var(--line);
+  border-radius:14px;padding:10px 12px;cursor:pointer;transition:transform .12s, border-color .12s, background .12s;
+}
+.anchor:hover{transform:translateY(-1px);border-color:var(--accent)}
+.anchor.done{background:#f0fbf7;border-color:var(--teal)}
+.anchor .check{
+  flex:none;width:22px;height:22px;border:2.5px solid var(--soft);border-radius:6px;
+  display:grid;place-items:center;background:#fff;transition:background .12s, border-color .12s;
+}
+.anchor.done .check{background:var(--teal);border-color:var(--teal)}
+.anchor.done .check::after{content:"\2713";color:#fff;font-weight:900;font-size:.95rem}
+.anchor .a-body{flex:1;min-width:0}
+.anchor .a-time{font-family:var(--display-font);font-weight:600;color:var(--soft);font-size:.8rem}
+.anchor .a-label{font-weight:800;font-size:.98rem;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.anchor .a-label .ic{font-size:1.05rem}
+.anchor .tag{font-size:.7rem;padding:1px 7px;border-radius:999px;font-weight:800;background:#fff3d6;color:#8c6300}
+.anchor a.link-btn{color:var(--teal);font-weight:800;text-decoration:none;font-size:.78rem;border-bottom:2px solid rgba(31,181,163,.35);white-space:nowrap}
+
+.kanban{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;align-items:start}
+.col{background:#fffdf8;border:2px dashed var(--line);border-radius:18px;padding:10px;min-height:160px;display:flex;flex-direction:column}
+.col h3{font-family:var(--display-font);font-weight:var(--display-weight);font-size:1rem;margin:2px 4px 10px;display:flex;align-items:center;gap:6px;color:var(--ink)}
+.col[data-col="doing"]{border-color:var(--accent);background:rgba(255,107,74,.07)}
+.col[data-col="done"]{border-color:var(--teal);background:rgba(31,181,163,.06)}
+.col-body{display:flex;flex-direction:column;gap:8px;min-height:80px;flex:1}
+.card{
+  background:#fff;border:2.5px solid var(--line);border-radius:14px;padding:11px 12px;
+  font-weight:700;color:var(--ink);cursor:grab;
+  display:flex;flex-direction:column;gap:5px;transition:transform .12s, border-color .12s, box-shadow .12s;
+}
+.card:hover{border-color:var(--accent);transform:translateY(-1px);box-shadow:0 4px 10px rgba(160,110,60,.1)}
+.card.sortable-chosen{opacity:.55;cursor:grabbing}
+.card.sortable-ghost{opacity:.3;background:#fffbe9}
+.card.goal{border-color:var(--sun);background:#fffbe9}
+.card .c-title{display:flex;align-items:center;gap:8px;font-size:.98rem;line-height:1.25}
+.card .c-title .ic{font-size:1.15rem;flex:none}
+.card .c-meta{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:.78rem;color:var(--soft);font-weight:700}
+.card a.link-btn{color:var(--teal);font-weight:800;text-decoration:none;border-bottom:2px solid rgba(31,181,163,.35);white-space:nowrap}
+.card .help-btn{margin-left:auto;background:none;border:none;color:var(--accent);font-family:'Nunito';font-weight:800;font-size:.78rem;cursor:pointer;padding:0;text-decoration:underline}
+.card .help-btn:hover{color:var(--accent-deep)}
+.card .tag{font-size:.7rem;padding:1px 7px;border-radius:999px;font-weight:800;background:#fff3d6;color:#8c6300}
+.card .tag.goal-tag{background:var(--sun);color:#5a4300}
+.col[data-col="done"] .card{opacity:.88}
+
+.signoff-section{display:none;animation:fade .45s ease both}
+.signoff-section.unlocked{display:block}
+.signoff-section h2 .conf{font-size:1.5em}
+.wrap-up-q{margin-bottom:14px}
+.wrap-up-q label{display:block;font-weight:800;margin-bottom:6px;font-size:.95rem}
+.wrap-up-q textarea{
+  width:100%;min-height:60px;padding:10px 12px;font-size:.95rem;font-family:'Nunito';font-weight:600;
+  border:2px solid var(--line);border-radius:12px;background:#fffdf8;resize:vertical;color:var(--ink);
+}
+.wrap-up-q textarea:focus{outline:none;border-color:var(--accent)}
+.signoff-line{display:flex;gap:14px;align-items:center;margin-top:18px;padding-top:14px;border-top:2px dashed var(--line);font-weight:800;color:var(--soft);font-size:.95rem}
+.signoff-line .line{flex:1;border-bottom:2px solid var(--soft);height:28px}
+
+.footer-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:30px}
+.btn{
+  font-family:var(--display-font);font-weight:var(--display-weight);border:none;border-radius:var(--radius-btn);cursor:pointer;
+  padding:14px 26px;font-size:1.05rem;color:#fff;background:var(--accent);text-decoration:none;display:inline-flex;align-items:center;gap:8px;
+  box-shadow:0 8px 20px rgba(232,73,42,.35);transition:transform .15s;
+}
+.btn:hover{transform:translateY(-2px)}
+.btn.ghost{background:#fff;color:var(--ink);border:2.5px solid var(--line);box-shadow:var(--shadow)}
+.btn.teal{background:var(--teal);box-shadow:0 8px 20px rgba(31,181,163,.35)}
+
+.progress{margin-top:8px;display:flex;align-items:center;gap:10px;font-family:var(--display-font);font-weight:600;color:var(--soft);font-size:.85rem}
+.progress .bar{flex:1;height:8px;background:var(--line);border-radius:999px;overflow:hidden}
+.progress .bar-fill{height:100%;background:var(--teal);width:0%;transition:width .25s}
+
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--ink);color:#fff;font-weight:800;border-radius:14px;padding:12px 18px;box-shadow:0 8px 20px rgba(0,0,0,.2);opacity:0;pointer-events:none;transition:opacity .2s, transform .2s;z-index:50}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(-4px)}
+
+.state-msg{text-align:center;padding:60px 20px;color:var(--soft);font-weight:700}
+.state-msg h2{font-family:var(--display-font);font-weight:var(--display-weight);color:var(--ink);margin:0 0 10px}
+
+@keyframes drop{from{opacity:0;transform:translateY(-16px)}to{opacity:1;transform:none}}
+@keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+/* =========================================================================
+   PER-KID THEMES
+   ========================================================================= */
+body.theme-gage{
+  --accent:#ff5a36;
+  --accent-deep:#c2330f;
+  --grape:#2563eb;
+  --radius-card:14px;
+  --radius-btn:10px;
+  --display-font:'Fredoka';
+  --display-weight:700;
+  background:
+    radial-gradient(1100px 520px at 50% -8%, rgba(255,90,54,.4), transparent 60%),
+    radial-gradient(800px 500px at 110% 10%, rgba(37,99,235,.18), transparent 55%),
+    radial-gradient(700px 500px at -10% 30%, rgba(31,181,163,.15), transparent 55%),
+    var(--bg);
+}
+body.theme-siena{
+  --accent:#ec4899;
+  --accent-deep:#be185d;
+  --grape:#a78bfa;
+  --sun:#ffd166;
+  --radius-card:28px;
+  --radius-btn:999px;
+  --display-font:'Quicksand';
+  --display-weight:600;
+  background:
+    radial-gradient(1100px 520px at 50% -8%, rgba(236,72,153,.32), transparent 60%),
+    radial-gradient(800px 500px at 110% 10%, rgba(167,139,250,.20), transparent 55%),
+    radial-gradient(700px 500px at -10% 30%, rgba(31,181,163,.18), transparent 55%),
+    var(--bg);
+}
+
+@media (max-width:720px){
+  .kanban{grid-template-columns:1fr}
+  .col{min-height:auto}
+}
+
+@media print{
+  body{background:#fff;padding:20px;color:#000}
+  .footer-actions, .help-btn, .toast{display:none !important}
+  .card, .anchor{break-inside:avoid;cursor:default}
+  .col{border:none;background:transparent;padding:0}
+  .kanban{grid-template-columns:1fr;gap:0}
+  .signoff-section{display:block !important}
+  .signoff-line .line{border-bottom:2px solid #333;min-width:240px}
+}
+</style>
+</head>
+<body>
+<div class="wrap" id="root">
+  <div class="state-msg" id="loading">
+    <h2>Loading today's plan&hellip;</h2>
+    <p>Hold tight</p>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>
+<script>
+const params = new URLSearchParams(window.location.search);
+const kid = (params.get("kid") || "").toLowerCase();
+const date = params.get("date") || todayISO();
+const root = document.getElementById("root");
+let dayData = null;
+let cardState = {};
+let stateKey = "";
+
+function todayISO(){
+  const d = new Date();
+  const y = d.getFullYear();
+  const m = String(d.getMonth()+1).padStart(2,"0");
+  const dd = String(d.getDate()).padStart(2,"0");
+  return y+"-"+m+"-"+dd;
+}
+
+function toast(msg, ms){
+  ms = ms || 2200;
+  const t = document.getElementById("toast");
+  t.textContent = msg;
+  t.classList.add("show");
+  setTimeout(function(){ t.classList.remove("show"); }, ms);
+}
+
+function errorScreen(title, sub){
+  root.innerHTML = '<div class="state-msg"><h2>'+title+'</h2><p>'+(sub||"")+'</p>'+
+    '<p style="margin-top:20px"><a class="btn ghost" href="index.html">&#8634; Back to picker</a></p></div>';
+}
+
+if(!kid || !["gage","siena"].includes(kid)){
+  errorScreen("Hmm, whose day is this?", "Try opening from the picker so we know which kid.");
+} else {
+  document.body.classList.add("theme-"+kid);
+  stateKey = "dayState:"+date+":"+kid;
+  loadDay();
+}
+
+async function loadDay(){
+  try{
+    const res = await fetch("days/"+date+"/"+kid+".json", {cache:"no-store"});
+    if(!res.ok) throw new Error("not found");
+    dayData = await res.json();
+    cardState = loadState();
+    render();
+  } catch(e){
+    errorScreen("No plan for today yet", "Ask Dad to build today's day. ("+date+")");
+  }
+}
+
+function loadState(){
+  try{
+    const raw = localStorage.getItem(stateKey);
+    return raw ? JSON.parse(raw) : {};
+  } catch(e){ return {}; }
+}
+function saveState(){
+  try{ localStorage.setItem(stateKey, JSON.stringify(cardState)); } catch(e){}
+}
+
+function render(){
+  const kidEmojis = { gage:"🚀", siena:"🌸" };
+  const goal = dayData.dailyGoal || {};
+  const anchors = dayData.anchors || [];
+  const items = dayData.workItems || [];
+
+  let html = '';
+  html += '<header>';
+  html += '<div class="kicker">Today’s plan</div>';
+  html += '<h1><span class="kemoji">'+kidEmojis[kid]+'</span> '+cap(kid)+'’s day</h1>';
+  html += '<div class="date">'+esc(dayData.displayDate || date)+(dayData.weekNumber? " · Week "+dayData.weekNumber : "")+'</div>';
+  html += '</header>';
+
+  if(goal.headline){
+    html += '<div class="goal-card">';
+    html += '<div class="goal-label">🎯 Today’s goal</div>';
+    html += '<div class="goal-headline">'+esc(goal.headline)+'</div>';
+    if(goal.explainer) html += '<div class="goal-explainer">'+esc(goal.explainer)+'</div>';
+    html += '</div>';
+  }
+
+  if(anchors.length){
+    html += '<section class="section">';
+    html += '<h2>⏰ Today’s anchors</h2>';
+    html += '<p class="hint">These happen at their time — just check them off when done.</p>';
+    html += '<ul class="anchor-list">'+anchors.map(renderAnchor).join("")+'</ul>';
+    html += '</section>';
+  }
+
+  if(items.length){
+    html += '<section class="section">';
+    html += '<h2>🛠️ What to work on</h2>';
+    html += '<p class="hint">Drag a card to <strong>Doing now</strong> to start. One at a time! Move to <strong>Done</strong> when finished.</p>';
+    html += '<div class="progress"><span id="prog-label">0 of '+items.length+' done</span><div class="bar"><div class="bar-fill" id="bar-fill"></div></div></div>';
+    html += '<div class="kanban" style="margin-top:14px">';
+    html += '<div class="col" data-col="todo"><h3>📋 To do</h3><div class="col-body" id="col-todo"></div></div>';
+    html += '<div class="col" data-col="doing"><h3>⚡ Doing now</h3><div class="col-body" id="col-doing"></div></div>';
+    html += '<div class="col" data-col="done"><h3>✅ Done</h3><div class="col-body" id="col-done"></div></div>';
+    html += '</div></section>';
+  }
+
+  html += '<section class="section signoff-section" id="signoff">';
+  html += '<h2><span class="conf">🎉</span> Day complete!</h2>';
+  html += '<p class="hint">Tell Dad how today went.</p>';
+  html += '<div class="wrap-up-q"><label>What went really well today?</label><textarea data-q="win" placeholder="Type what you’re proud of…"></textarea></div>';
+  html += '<div class="wrap-up-q"><label>Something I want to try tomorrow:</label><textarea data-q="next" placeholder="Anything you want to do better next time…"></textarea></div>';
+  html += '<div class="wrap-up-q"><label>Did I earn any bonus rewards today? (For going above what was asked.)</label><textarea data-q="rewards" placeholder="What bonus did you earn?"></textarea></div>';
+  html += '<div class="signoff-line"><span>Dad’s sign-off:</span><span class="line"></span><span>Date: __________</span></div>';
+  html += '</section>';
+
+  html += '<div class="footer-actions">';
+  html += '<button class="btn ghost" onclick="window.print()">🖨️ Print</button>';
+  html += '<a class="btn ghost" href="index.html?kid='+kid+'">↺ Build a new day</a>';
+  html += '</div>';
+
+  root.innerHTML = html;
+
+  items.forEach(function(item){
+    const col = cardState[item.id] || "todo";
+    const card = renderCard(item);
+    document.getElementById("col-"+col).insertAdjacentHTML("beforeend", card);
+  });
+
+  document.querySelectorAll(".anchor").forEach(function(a){
+    const id = a.dataset.id;
+    if(cardState["anchor:"+id] === "done") a.classList.add("done");
+    a.addEventListener("click", function(e){
+      if(e.target.tagName === "A") return;
+      a.classList.toggle("done");
+      cardState["anchor:"+id] = a.classList.contains("done") ? "done" : "todo";
+      saveState();
+    });
+  });
+
+  document.querySelectorAll(".wrap-up-q textarea").forEach(function(ta){
+    const q = ta.dataset.q;
+    ta.value = cardState["wrap:"+q] || "";
+    ta.addEventListener("input", function(){
+      cardState["wrap:"+q] = ta.value;
+      saveState();
+    });
+  });
+
+  setupKanban();
+  updateProgress();
+  checkSignoffUnlock();
+}
+
+function renderAnchor(a){
+  const tag = a.sharedWith ? '<span class="tag">with '+esc(a.sharedWith)+'</span>' :
+              a.withDad ? '<span class="tag">with Dad</span>' : '';
+  const time = (a.time && a.endTime) ? a.time+' – '+a.endTime : (a.time || '');
+  const link = a.meetUrl ? '<a class="link-btn" href="'+esc(a.meetUrl)+'" target="_blank" rel="noopener">Join Meet ↗</a>'
+             : a.link ? '<a class="link-btn" href="'+esc(a.link)+'" target="_blank" rel="noopener">'+esc(a.linkLabel||"Open")+' ↗</a>' : '';
+  return '<li class="anchor" data-id="'+esc(a.id)+'">'+
+    '<span class="check"></span>'+
+    '<div class="a-body">'+
+    '<div class="a-time">'+esc(time)+'</div>'+
+    '<div class="a-label"><span class="ic">'+esc(a.icon||"•")+'</span>'+esc(a.label)+' '+tag+'</div>'+
+    '</div>'+link+'</li>';
+}
+
+function renderCard(item){
+  const tags = [];
+  if(item.isDailyGoal) tags.push('<span class="tag goal-tag">daily goal</span>');
+  if(item.sharedWith) tags.push('<span class="tag">with '+esc(item.sharedWith)+'</span>');
+  if(item.estimatedTime) tags.push('<span>≈ '+esc(item.estimatedTime)+'</span>');
+  const linkAttr = item.link && item.link.startsWith("http") ? ' target="_blank" rel="noopener"' : '';
+  const link = item.link ? '<a class="link-btn" href="'+esc(item.link)+'"'+linkAttr+'>'+esc(item.linkLabel||"Open")+' ↗</a>' : '';
+  const safeLabel = String(item.label||"").replace(/'/g,"\\'");
+  const help = '<button class="help-btn" onclick="askHelp(\''+esc(item.id)+'\',\''+safeLabel+'\')">I’m stuck</button>';
+  const goalCls = item.isDailyGoal ? ' goal' : '';
+  return '<div class="card'+goalCls+'" data-id="'+esc(item.id)+'">'+
+    '<div class="c-title"><span class="ic">'+esc(item.icon||"•")+'</span><span>'+esc(item.label)+'</span></div>'+
+    '<div class="c-meta">'+tags.join(" ")+' '+link+' '+help+'</div>'+
+    '</div>';
+}
+
+function setupKanban(){
+  ["todo","doing","done"].forEach(function(colName){
+    const el = document.getElementById("col-"+colName);
+    Sortable.create(el, {
+      group:"kanban",
+      animation:160,
+      onAdd: function(evt){ handleMove(evt, colName); },
+      onUpdate: function(evt){ handleMove(evt, colName); }
+    });
+  });
+}
+
+function handleMove(evt, destCol){
+  const cardEl = evt.item;
+  const id = cardEl.dataset.id;
+
+  if(destCol === "doing"){
+    const doingBody = document.getElementById("col-doing");
+    const others = Array.from(doingBody.children).filter(function(c){ return c.dataset.id !== id; });
+    if(others.length > 0){
+      const bumped = others[0];
+      document.getElementById("col-todo").appendChild(bumped);
+      cardState[bumped.dataset.id] = "todo";
+      toast('One thing at a time — "'+labelOf(bumped.dataset.id)+'" went back to To do');
+    }
+  }
+
+  cardState[id] = destCol;
+  saveState();
+  updateProgress();
+  checkSignoffUnlock();
+
+  if(destCol === "done") cardEl.animate(
+    [{transform:"scale(1)"},{transform:"scale(1.04)"},{transform:"scale(1)"}],
+    {duration:280, easing:"ease-out"}
+  );
+}
+
+function labelOf(id){
+  const it = (dayData.workItems||[]).find(function(x){ return x.id===id; });
+  return it ? it.label : id;
+}
+
+function updateProgress(){
+  const items = dayData.workItems || [];
+  const doneCount = items.filter(function(i){ return cardState[i.id] === "done"; }).length;
+  const pct = items.length ? (doneCount/items.length)*100 : 0;
+  const bar = document.getElementById("bar-fill");
+  const label = document.getElementById("prog-label");
+  if(bar) bar.style.width = pct+"%";
+  if(label) label.textContent = doneCount+" of "+items.length+" done";
+}
+
+function checkSignoffUnlock(){
+  const items = dayData.workItems || [];
+  const allDone = items.length > 0 && items.every(function(i){ return cardState[i.id] === "done"; });
+  const so = document.getElementById("signoff");
+  if(!so) return;
+  if(allDone){
+    if(!so.classList.contains("unlocked")){
+      so.classList.add("unlocked");
+      toast("🎉 You finished everything! Sign-off unlocked.");
+    }
+  } else {
+    so.classList.remove("unlocked");
+  }
+}
+
+function askHelp(itemId, label){
+  const dadEmail = "kevin.webwithus+kids@gmail.com";
+  const subject = cap(kid)+" needs help with: "+label;
+  const body = "Hi Dad,\n\nI’m stuck on: "+label+"\n\nCan you help me when you can?\n\n— "+cap(kid);
+  const url = "mailto:"+encodeURIComponent(dadEmail)+"?subject="+encodeURIComponent(subject)+"&body="+encodeURIComponent(body);
+  window.location.href = url;
+}
+
+function cap(s){ return s ? s.charAt(0).toUpperCase()+s.slice(1) : ""; }
+function esc(s){ return String(s==null?"":s).replace(/[&<>"']/g, function(c){ return ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"})[c]; }); }
+</script>
+</body>
+</html>
