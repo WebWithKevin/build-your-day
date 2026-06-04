@@ -10,9 +10,6 @@
 <style>
 /* =========================================================================
    DAY VIEW  —  kid's daily plan, hybrid kanban
-   ------------------------------------------------------------------------
-   DAD: this page is data-driven. To change a day, edit the JSON in
-   /days/<YYYY-MM-DD>/<kid>.json. Per-kid theme overrides at the bottom.
    ========================================================================= */
 :root{
   --bg:#fff7ec;
@@ -62,14 +59,30 @@ h1 .kemoji{font-size:.9em}
 .section{margin:0 0 22px;background:var(--card);border:2px solid var(--line);border-radius:var(--radius-card);padding:18px 18px 14px;box-shadow:var(--shadow)}
 .section h2{font-family:var(--display-font);font-weight:var(--display-weight);font-size:1.2rem;margin:0 0 4px;display:flex;align-items:center;gap:10px}
 .section .hint{color:var(--soft);font-weight:700;font-size:.88rem;margin:0 0 14px}
+.section .h2-row{display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:8px;margin:0 0 4px}
+.section .h2-row h2{margin:0}
+#now-display{font-family:var(--display-font);font-weight:600;color:var(--soft);font-size:.85rem}
 
 .anchor-list{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px}
 .anchor{
+  position:relative;
   display:flex;align-items:center;gap:10px;background:#fffdf8;border:2px solid var(--line);
   border-radius:14px;padding:10px 12px;cursor:pointer;transition:transform .12s, border-color .12s, background .12s;
 }
 .anchor:hover{transform:translateY(-1px);border-color:var(--accent)}
 .anchor.done{background:#f0fbf7;border-color:var(--teal)}
+.anchor.current{border-color:#ef4444;background:rgba(239,68,68,.06);animation:pulse 2s ease-in-out infinite}
+.anchor.current::after{
+  content:"🔴 NOW";position:absolute;top:-9px;right:8px;
+  background:#ef4444;color:#fff;font-size:.62rem;font-weight:800;
+  padding:2px 7px;border-radius:6px;letter-spacing:.04em;
+}
+.anchor.next{border-color:var(--sun)}
+.anchor.next::after{
+  content:"NEXT UP";position:absolute;top:-9px;right:8px;
+  background:var(--sun);color:#5a4300;font-size:.62rem;font-weight:800;
+  padding:2px 7px;border-radius:6px;letter-spacing:.04em;
+}
 .anchor .check{
   flex:none;width:22px;height:22px;border:2.5px solid var(--soft);border-radius:6px;
   display:grid;place-items:center;background:#fff;transition:background .12s, border-color .12s;
@@ -135,7 +148,7 @@ h1 .kemoji{font-size:.9em}
 .progress .bar{flex:1;height:8px;background:var(--line);border-radius:999px;overflow:hidden}
 .progress .bar-fill{height:100%;background:var(--teal);width:0%;transition:width .25s}
 
-.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--ink);color:#fff;font-weight:800;border-radius:14px;padding:12px 18px;box-shadow:0 8px 20px rgba(0,0,0,.2);opacity:0;pointer-events:none;transition:opacity .2s, transform .2s;z-index:50}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--ink);color:#fff;font-weight:800;border-radius:14px;padding:12px 18px;box-shadow:0 8px 20px rgba(0,0,0,.2);opacity:0;pointer-events:none;transition:opacity .2s, transform .2s;z-index:50;max-width:90vw;text-align:center}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(-4px)}
 
 .state-msg{text-align:center;padding:60px 20px;color:var(--soft);font-weight:700}
@@ -143,10 +156,12 @@ h1 .kemoji{font-size:.9em}
 
 @keyframes drop{from{opacity:0;transform:translateY(-16px)}to{opacity:1;transform:none}}
 @keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@keyframes pulse{
+  0%,100%{box-shadow:0 0 0 0 rgba(239,68,68,.35)}
+  50%{box-shadow:0 0 0 8px rgba(239,68,68,0)}
+}
 
-/* =========================================================================
-   PER-KID THEMES
-   ========================================================================= */
+/* per-kid themes */
 body.theme-gage{
   --accent:#ff5a36;
   --accent-deep:#c2330f;
@@ -184,7 +199,8 @@ body.theme-siena{
 
 @media print{
   body{background:#fff;padding:20px;color:#000}
-  .footer-actions, .help-btn, .toast{display:none !important}
+  .footer-actions, .help-btn, .toast, #now-display, .anchor.current::after, .anchor.next::after{display:none !important}
+  .anchor.current{animation:none}
   .card, .anchor{break-inside:avoid;cursor:default}
   .col{border:none;background:transparent;padding:0}
   .kanban{grid-template-columns:1fr;gap:0}
@@ -212,13 +228,37 @@ const root = document.getElementById("root");
 let dayData = null;
 let cardState = {};
 let stateKey = "";
+let lastBlockedToast = 0;
 
 function todayISO(){
   const d = new Date();
-  const y = d.getFullYear();
-  const m = String(d.getMonth()+1).padStart(2,"0");
-  const dd = String(d.getDate()).padStart(2,"0");
-  return y+"-"+m+"-"+dd;
+  return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
+}
+
+function fmt12(t24){
+  if(!t24 || !t24.includes(":")) return t24 || "";
+  const parts = t24.split(":");
+  let h = parseInt(parts[0],10);
+  const m = parts[1];
+  const period = h >= 12 ? "PM" : "AM";
+  if(h === 0) h = 12;
+  else if(h > 12) h -= 12;
+  return h + ":" + m + " " + period;
+}
+
+function fmt12Now(d){
+  let h = d.getHours();
+  const m = String(d.getMinutes()).padStart(2,"0");
+  const period = h >= 12 ? "PM" : "AM";
+  if(h === 0) h = 12;
+  else if(h > 12) h -= 12;
+  return h + ":" + m + " " + period;
+}
+
+function parseTimeToMin(t){
+  if(!t || !t.includes(":")) return -1;
+  const parts = t.split(":");
+  return parseInt(parts[0],10) * 60 + parseInt(parts[1],10);
 }
 
 function toast(msg, ms){
@@ -249,6 +289,8 @@ async function loadDay(){
     dayData = await res.json();
     cardState = loadState();
     render();
+    highlightCurrentAnchor();
+    setInterval(highlightCurrentAnchor, 30000);
   } catch(e){
     errorScreen("No plan for today yet", "Ask Dad to build today's day. ("+date+")");
   }
@@ -287,8 +329,8 @@ function render(){
 
   if(anchors.length){
     html += '<section class="section">';
-    html += '<h2>⏰ Today’s anchors</h2>';
-    html += '<p class="hint">These happen at their time — just check them off when done.</p>';
+    html += '<div class="h2-row"><h2>⏰ Today’s anchors</h2><span id="now-display"></span></div>';
+    html += '<p class="hint">These happen at their time — just check them off when done. The <strong style="color:#ef4444">🔴 NOW</strong> badge shows what’s happening right now.</p>';
     html += '<ul class="anchor-list">'+anchors.map(renderAnchor).join("")+'</ul>';
     html += '</section>';
   }
@@ -296,7 +338,7 @@ function render(){
   if(items.length){
     html += '<section class="section">';
     html += '<h2>🛠️ What to work on</h2>';
-    html += '<p class="hint">Drag a card to <strong>Doing now</strong> to start. One at a time! Move to <strong>Done</strong> when finished.</p>';
+    html += '<p class="hint">Drag a card from <strong>To do</strong> to <strong>Doing now</strong> when you start it. Move it to <strong>Done</strong> when you finish. You can’t skip — go through Doing first!</p>';
     html += '<div class="progress"><span id="prog-label">0 of '+items.length+' done</span><div class="bar"><div class="bar-fill" id="bar-fill"></div></div></div>';
     html += '<div class="kanban" style="margin-top:14px">';
     html += '<div class="col" data-col="todo"><h3>📋 To do</h3><div class="col-body" id="col-todo"></div></div>';
@@ -355,7 +397,7 @@ function render(){
 function renderAnchor(a){
   const tag = a.sharedWith ? '<span class="tag">with '+esc(a.sharedWith)+'</span>' :
               a.withDad ? '<span class="tag">with Dad</span>' : '';
-  const time = (a.time && a.endTime) ? a.time+' – '+a.endTime : (a.time || '');
+  const time = (a.time && a.endTime) ? fmt12(a.time)+' – '+fmt12(a.endTime) : (a.time ? fmt12(a.time) : '');
   const link = a.meetUrl ? '<a class="link-btn" href="'+esc(a.meetUrl)+'" target="_blank" rel="noopener">Join Meet ↗</a>'
              : a.link ? '<a class="link-btn" href="'+esc(a.link)+'" target="_blank" rel="noopener">'+esc(a.linkLabel||"Open")+' ↗</a>' : '';
   return '<li class="anchor" data-id="'+esc(a.id)+'">'+
@@ -382,12 +424,37 @@ function renderCard(item){
     '</div>';
 }
 
+function isValidKanbanMove(from, to){
+  if(from === to) return true;
+  return (from === "todo"  && to === "doing") ||
+         (from === "doing" && to === "todo")  ||
+         (from === "doing" && to === "done")  ||
+         (from === "done"  && to === "doing");
+}
+
+function onMoveHandler(evt){
+  const from = evt.from.id.replace("col-","");
+  const to = evt.to.id.replace("col-","");
+  const valid = isValidKanbanMove(from, to);
+  if(!valid){
+    const now = Date.now();
+    if(now - lastBlockedToast > 1500){
+      lastBlockedToast = now;
+      if(from === "todo" && to === "done") toast("Move it to Doing first! One step at a time.");
+      else if(from === "done" && to === "todo") toast("Move it back through Doing first.");
+      else toast("Can’t skip steps — go through Doing.");
+    }
+  }
+  return valid;
+}
+
 function setupKanban(){
   ["todo","doing","done"].forEach(function(colName){
     const el = document.getElementById("col-"+colName);
     Sortable.create(el, {
       group:"kanban",
       animation:160,
+      onMove: onMoveHandler,
       onAdd: function(evt){ handleMove(evt, colName); },
       onUpdate: function(evt){ handleMove(evt, colName); }
     });
@@ -448,6 +515,42 @@ function checkSignoffUnlock(){
   } else {
     so.classList.remove("unlocked");
   }
+}
+
+function highlightCurrentAnchor(){
+  if(!dayData) return;
+  const now = new Date();
+  const nowDisplay = document.getElementById("now-display");
+  if(nowDisplay) nowDisplay.textContent = "🕒 Right now: " + fmt12Now(now);
+
+  // Only highlight if viewing today's date
+  if(date !== todayISO()){
+    document.querySelectorAll(".anchor").forEach(function(el){
+      el.classList.remove("current"); el.classList.remove("next");
+    });
+    return;
+  }
+
+  const nowMin = now.getHours()*60 + now.getMinutes();
+  const anchors = dayData.anchors || [];
+  let currentId = null, nextId = null;
+  for(let i=0;i<anchors.length;i++){
+    const a = anchors[i];
+    const s = parseTimeToMin(a.time);
+    const e = parseTimeToMin(a.endTime);
+    if(s>=0 && e>=0 && nowMin>=s && nowMin<e){
+      currentId = a.id;
+      break;
+    }
+    if(s>=0 && nowMin<s && nextId===null){
+      nextId = a.id;
+    }
+  }
+  document.querySelectorAll(".anchor").forEach(function(el){
+    const id = el.dataset.id;
+    el.classList.toggle("current", id === currentId);
+    el.classList.toggle("next", id === nextId && currentId === null);
+  });
 }
 
 function askHelp(itemId, label){

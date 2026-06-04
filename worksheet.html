@@ -63,19 +63,6 @@ h1{font-family:var(--display-font);font-weight:var(--display-weight);font-size:c
 .q .room.lines-3 textarea{min-height:90px}
 .q .room.lines-5 textarea{min-height:140px}
 
-.print-lines{display:none}
-@media print{
-  .print-lines{display:block;border-top:2px solid var(--line);height:24px;margin-top:6px}
-  .q .room.lines-1{height:34px}
-  .q .room.lines-2{height:64px}
-  .q .room.lines-3{height:96px}
-  .q .room.lines-5{height:160px}
-  textarea{display:none}
-  .q .room::before{content:"";display:block;border-bottom:1.5px solid #999;margin-top:14px}
-  .q .room::after{content:"";display:block;border-bottom:1.5px solid #999;margin-top:24px}
-  .q .room.lines-3::after, .q .room.lines-5::after{content:"";display:block;border-bottom:1.5px solid #999;margin-top:24px}
-}
-
 .footer-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:30px}
 .btn{
   font-family:var(--display-font);font-weight:var(--display-weight);border:none;border-radius:var(--radius-btn);cursor:pointer;
@@ -114,11 +101,49 @@ body.theme-siena{
     var(--bg);
 }
 
+/* =========================================================================
+   PRINT  —  show typed answers if present, ruled lines if empty
+   ========================================================================= */
 @media print{
   body{background:#fff;padding:20px;color:#000}
   .footer-actions{display:none !important}
   .section{box-shadow:none;border:1.5px solid #999;break-inside:avoid}
   .q{break-inside:avoid;page-break-inside:avoid}
+
+  /* show textarea content in print, no border, just clean text */
+  .q .room textarea{
+    border:none !important;
+    background:transparent !important;
+    padding:4px 0 !important;
+    resize:none !important;
+    overflow:visible !important;
+    width:100%;
+    color:#000;
+    font-family:'Nunito', sans-serif;
+    font-size:11pt;
+    line-height:24px;
+  }
+
+  /* if the textarea is empty (placeholder still showing), draw ruled writing lines */
+  .q .room textarea:placeholder-shown{
+    background-image: repeating-linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent 23px,
+      #888 23px,
+      #888 24px
+    ) !important;
+    background-repeat: no-repeat !important;
+    background-size: 100% 100% !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    color:transparent;
+  }
+
+  .q .room.lines-1 textarea{min-height:32px}
+  .q .room.lines-2 textarea{min-height:56px}
+  .q .room.lines-3 textarea{min-height:88px}
+  .q .room.lines-5 textarea{min-height:144px}
 }
 </style>
 </head>
