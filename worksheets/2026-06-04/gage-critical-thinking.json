@@ -5,14 +5,15 @@
   "subject": "critical-thinking",
   "subjectLabel": "Brain Workout",
   "subjectIcon": "🧠",
-  "level": "On-level",
-  "theme": "robots",
-  "instructions": "Take your time. Show your thinking when it helps.",
+  "level": "On-level (6th)",
+  "theme": "Demon Slayer",
+  "instructions": "These are puzzles to think through, not a test. Take your time and explain HOW you figured each one out — your reasoning matters more than speed. If you get stuck, try the next one and come back.",
   "questions": [
-    { "id": "pattern", "prompt": "Pattern. A robot factory makes parts in a sequence: 2, 6, 12, 20, 30, ____. What number comes next, and why?", "lines": 3 },
-    { "id": "logic",   "prompt": "Logic. Three robots — Sam, Theo, and Owen — were built in order. Sam was built before Theo. Owen was built after Theo. List them from oldest to newest.", "lines": 2 },
-    { "id": "riddle",  "prompt": "Riddle. I have keys but open no locks. I have space but no room. You can enter, but you can’t go inside. What am I?", "lines": 1 },
-    { "id": "strategy","prompt": "Strategy. A repair-bot is at the bottom of a 12-foot maintenance shaft. Each day it climbs 4 feet up, but each night it slides 2 feet back. How many days until it reaches the top? (Hint: think about the last day — does it slide back after it gets out?)", "lines": 3 },
-    { "id": "scenario","prompt": "What would you do? Your friend wants you to skip your chore to come ride bikes with him. What would you say, and why? (2–3 sentences.)", "lines": 5 }
+    { "id": "q1", "prompt": "Pattern: A slayer's training streak goes 1, 1, 2, 3, 5, 8, ___, ___. What are the next two numbers, and what is the rule? (Hint: look at how each number is made from the two before it.)", "lines": 3 },
+    { "id": "q2", "prompt": "Pattern: 81, 27, 9, 3, ___, ___. What comes next, and what is the rule?", "lines": 2 },
+    { "id": "q3", "prompt": "Logic grid: Three trainees — Kael, Mina, and Toru — each mastered a different breathing style: Water, Flame, and Wind. (1) Kael did NOT learn Flame. (2) Mina is afraid of heights, so she did NOT learn Wind. (3) Toru learned Water. Who learned which style? Explain how you know.", "lines": 4 },
+    { "id": "q4", "prompt": "Riddle: I grow stronger the more you practice me, yet I cost nothing and weigh nothing. Masters say I beat raw power in a long fight. What am I? (Think about the Reading story.)", "lines": 2 },
+    { "id": "q5", "prompt": "Strategy: A slayer must cross 4 stepping stones over a river, and each stone can only be stepped on once. From each stone she can jump forward 1 or 2 stones at a time. How many different ways can she get from the start to the far bank? (Try drawing it out.)", "lines": 4 },
+    { "id": "q6", "prompt": "Scenario: A newer trainee on your team keeps making the same mistake and is getting discouraged. You're better at this skill than they are. What would you do to help them, and why? (Explain your thinking — there's no single right answer.)", "lines": 5 }
   ]
 }

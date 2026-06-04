@@ -1,0 +1,24 @@
+{
+  "kid": "gage",
+  "date": "2026-06-04",
+  "displayDate": "Thursday, June 4, 2026",
+  "subject": "reading",
+  "subjectLabel": "Reading",
+  "subjectIcon": "📚",
+  "level": "On-level (6th)",
+  "theme": "Demon Slayer",
+  "instructions": "Read the story once for the action, then again to catch the details. Answer in your own words — there's plenty of room. For the 'what do you think' questions, just explain your reasoning.",
+  "passage": {
+    "title": "The Slowest Breath",
+    "text": "Kael was the last of his training group to master the First Breath. While the others had already learned to steady their hearts and move like running water, Kael's hands still shook every time he raised his wooden blade. Master Rin never rushed him. \"Power that comes fast,\" she said, \"often leaves just as fast. Yours is taking root.\"\n\nEvery dawn, Kael climbed the frosted hill behind the dojo to practice alone. He counted his breaths — in for four, hold for four, out for four — until the cold air stopped stinging and his mind went quiet. Most mornings he failed. The blade wobbled. His footing slipped on the icy stones. But he climbed the hill anyway, every single day, while the village below was still asleep.\n\nThen came the night of the warning bell. A shadow-creature had slipped past the outer watch and was prowling near the granary, where the village stored its winter food. The senior students were away on a distant mission. Only the youngest trainees remained — and the creature was fast, faster than anything they had practiced against.\n\nKael stepped forward before he could talk himself out of it. He breathed — in for four, hold for four, out for four — the same rhythm he had practiced on the lonely hill a hundred frozen mornings. This time his hands did not shake. He did not need to be the strongest. He only needed to be steady, and to hold the line until help arrived.\n\nWhen the senior students returned at sunrise, they found the granary safe and Kael still standing watch, calm as still water. Master Rin only smiled. \"There,\" she said. \"It took root.\""
+  },
+  "questions": [
+    { "id": "q1", "prompt": "Why was Kael the last in his group to master the First Breath? What did Master Rin say about that?", "lines": 3 },
+    { "id": "q2", "prompt": "Put these events in order: the warning bell rings / Kael practices alone on the frosted hill / Master Rin smiles and says 'It took root' / Kael holds the line at the granary.", "lines": 3 },
+    { "id": "q3", "prompt": "What do you think the phrase 'Yours is taking root' means? Use details from the story to support your answer.", "lines": 5 },
+    { "id": "q4", "prompt": "Kael says he 'did not need to be the strongest.' What DID he need to be, and how did his daily practice prepare him for that? Support your answer with the text.", "lines": 5 },
+    { "id": "q5", "prompt": "What is the central idea (the main message) of this story? Explain in 2–3 sentences.", "lines": 5 },
+    { "id": "q6", "prompt": "Vocabulary from context: What does 'prowling' mean in the sentence about the shadow-creature near the granary?", "lines": 2 },
+    { "id": "q7", "prompt": "Vocabulary from context: The story compares Kael to 'still water' twice. What kind of person is the author saying he became?", "lines": 3 }
+  ]
+}

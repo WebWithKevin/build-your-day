@@ -1,0 +1,23 @@
+{
+  "kid": "gage",
+  "date": "2026-06-04",
+  "displayDate": "Thursday, June 4, 2026",
+  "subject": "math",
+  "subjectLabel": "Math",
+  "subjectIcon": "➗",
+  "level": "On-level (6th)",
+  "theme": "Demon Slayer",
+  "instructions": "Start with the warm-up to get rolling — those are your quick wins. Then take on the slayer problems. Show your steps, and don't sweat the tricky ones; getting partway is still progress. You've got this.",
+  "questions": [
+    { "id": "q1", "prompt": "Warm-up: 7 × 8 =", "lines": 1 },
+    { "id": "q2", "prompt": "Warm-up: 144 ÷ 12 =", "lines": 1 },
+    { "id": "q3", "prompt": "Warm-up: 1/2 + 1/4 =", "lines": 1 },
+    { "id": "q4", "prompt": "Warm-up: 3.5 + 2.7 =", "lines": 1 },
+    { "id": "q5", "prompt": "Dividing fractions: 3/4 ÷ 1/2 =", "lines": 2 },
+    { "id": "q6", "prompt": "Ratios: A training squad has 3 slayers for every 1 trainer. If there are 12 slayers, how many trainers are there?", "lines": 2 },
+    { "id": "q7", "prompt": "Percent: A slayer lands 25% of 40 practice strikes on target. How many strikes hit the target?", "lines": 2 },
+    { "id": "q8", "prompt": "Decimals: A wooden practice sword weighs 1.5 pounds. How much do 6 of them weigh together?", "lines": 2 },
+    { "id": "q9", "prompt": "Word problem: A young slayer trains 45 minutes every morning for 6 days. (a) How many minutes is that in all? (b) Write that as hours and minutes.", "lines": 3 },
+    { "id": "q10", "prompt": "Two-step word problem: A team completes 8 missions and earns 15 points for each one. Then they lose 5 points total for one small mistake. How many points do they finish with?", "lines": 3 }
+  ]
+}
