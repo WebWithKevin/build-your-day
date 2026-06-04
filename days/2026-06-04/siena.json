@@ -11,7 +11,7 @@
   },
   "anchors": [
     { "id": "breakfast", "time": "10:00", "endTime": "10:20", "label": "Breakfast", "icon": "🍳", "sharedWith": "family" },
-    { "id": "bible", "time": "10:25", "endTime": "10:45", "label": "Bible time", "icon": "📖", "sharedWith": "Gage", "withDad": true, "meetUrl": "https://meet.google.com/new", "linkLabel": "Join Meet" },
+    { "id": "bible", "time": "10:25", "endTime": "10:45", "label": "Bible time", "icon": "📖", "sharedWith": "Gage", "withDad": true, "meetUrl": "https://meet.google.com/uzz-qiwy-his", "linkLabel": "Join Meet" },
     { "id": "morning-snack", "time": "11:50", "endTime": "12:00", "label": "Morning snack", "icon": "🍎", "sharedWith": "family" },
     { "id": "exercise", "time": "12:50", "endTime": "13:20", "label": "Exercise: Bike riding", "icon": "🚲", "sharedWith": "Gage" },
     { "id": "lunch", "time": "13:20", "endTime": "13:50", "label": "Lunch", "icon": "🥪", "sharedWith": "family" },
