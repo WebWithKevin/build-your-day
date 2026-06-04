@@ -6,13 +6,14 @@
   "subjectLabel": "Brain Workout",
   "subjectIcon": "🧠",
   "level": "On-level",
-  "theme": "unicorns",
-  "instructions": "Take your time. Show your thinking when it helps.",
+  "theme": "How to Train Your Dragon",
+  "instructions": "These are puzzles, not tests — there's no rush. Think it through, and for the 'why' questions, explain how you figured it out. Stuck for a while? That's okay. Try your best idea before asking for a hint.",
   "questions": [
-    { "id": "pattern", "prompt": "Pattern. A unicorn herd grew in groups: 1, 4, 9, 16, 25, ____. What number comes next, and why?", "lines": 3 },
-    { "id": "logic",   "prompt": "Logic. Three friends — Ava, Ben, and Cleo — each have a different magical pet: a cat, a dog, and a rabbit. Ava does NOT have the dog. Cleo has the rabbit. Who has which pet?", "lines": 3 },
-    { "id": "riddle",  "prompt": "Riddle. The more you take, the more you leave behind. What am I?", "lines": 1 },
-    { "id": "strategy","prompt": "Strategy. You want to share 5 unicorn-shaped cookies equally with 2 friends (3 people total, including you). Each person should get the same amount. How would you do it? Describe your plan.", "lines": 4 },
-    { "id": "scenario","prompt": "What would you do? You see your friend take an extra cookie at snack time when she was only supposed to take one. What would you do, and why? (2–3 sentences.)", "lines": 5 }
+    { "id": "q1", "prompt": "Pattern: A dragon's fire grows each day: 2, 4, 8, 16, ___, ___. What are the next two numbers, and what is the rule?", "lines": 3 },
+    { "id": "q2", "prompt": "Pattern: The dragons line up by wingspan: 3, 6, 5, 8, 7, 10, ___, ___. What are the next two numbers? (Hint: look at how it goes up, then back a little.)", "lines": 3 },
+    { "id": "q3", "prompt": "Logic: Three dragons — a red one, a blue one, and a green one — finished a flying race. The blue dragon was NOT first. The red dragon finished right behind the green dragon. Who came in 1st, 2nd, and 3rd?", "lines": 4 },
+    { "id": "q4", "prompt": "Riddle: I am light enough to ride the storm, but I can warm your breakfast bread. The big ones can't do what I do best. What makes me special? (Think about the story — what is the 'special' thing?)", "lines": 3 },
+    { "id": "q5", "prompt": "Strategy: You need to feed 4 dragons, but you only have 1 bucket and the well is far away. Each trip to the well fills the bucket with enough fish for exactly 2 dragons. What is the FEWEST number of trips you need to feed all 4? Explain why.", "lines": 4 },
+    { "id": "q6", "prompt": "Scenario: A new, scared dragon won't come out of its cave and snaps when anyone gets close. What would YOU do to help it feel safe, and why? (There's no single right answer — explain your thinking.)", "lines": 5 }
   ]
 }

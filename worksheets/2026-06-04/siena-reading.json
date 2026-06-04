@@ -1,0 +1,24 @@
+{
+  "kid": "siena",
+  "date": "2026-06-04",
+  "displayDate": "Thursday, June 4, 2026",
+  "subject": "reading",
+  "subjectLabel": "Reading",
+  "subjectIcon": "📚",
+  "level": "On-level",
+  "theme": "How to Train Your Dragon",
+  "instructions": "Read the story twice — once for fun, once to notice the details. Then answer the questions. There are no wrong feelings about a story, so for the 'what do you think' questions, just explain your idea.",
+  "passage": {
+    "title": "The Smallest Dragon",
+    "text": "Mira was the youngest trainer on Windhollow Isle, and her dragon was the smallest one in the whole roost. While the other dragons roared and breathed long ribbons of fire, hers could only manage a single warm puff — barely enough to toast a slice of bread. The older kids called him Ember, which they meant as a joke. Mira decided to keep the name anyway, because she thought it sounded brave.\n\nEvery morning before lessons, Mira and Ember practiced flying over the cove. At first Ember wobbled like a leaf in the wind. He bumped into rocks. He landed in the cold water more times than Mira could count. But Mira never yelled. She just dried him off, scratched the spot behind his ear that he loved, and said, \"Again, but slower this time.\"\n\nThen came the day of the great storm. The wind howled so hard that the biggest dragons refused to leave their caves. A fishing boat had drifted out past the rocks, and a little boy was trapped on board. The strong dragons were too heavy to fly safely in such fierce gusts — but Ember was light. Light enough to dart between the wind like a swallow.\n\nMira climbed onto his back. \"Slower this time,\" she whispered, just like always. Ember rose into the storm. He twisted and dipped, riding the gusts instead of fighting them, and reached the boat. The boy grabbed on, and together they glided home through the rain.\n\nThat night, no one laughed at Ember's name. Being the smallest, it turned out, was exactly what the island had needed."
+  },
+  "questions": [
+    { "id": "q1", "prompt": "Where do Mira and Ember practice flying every morning?", "lines": 2 },
+    { "id": "q2", "prompt": "Put these events in the order they happened: the great storm arrives / Ember rescues the boy / Mira and Ember practice over the cove / the older kids name the dragon Ember.", "lines": 3 },
+    { "id": "q3", "prompt": "Why do you think Mira kept the name 'Ember' even though it was meant as a joke? Use a detail from the story to support your answer.", "lines": 5 },
+    { "id": "q4", "prompt": "Why were the bigger, stronger dragons NOT able to make the rescue, but Ember was? Support your answer with the text.", "lines": 5 },
+    { "id": "q5", "prompt": "What do you think the author wants you to learn from this story? (What is the main message?)", "lines": 5 },
+    { "id": "q6", "prompt": "Vocabulary from context: In the story, the word 'gusts' means... (Use the way it is used in the sentences to figure it out.)", "lines": 3 },
+    { "id": "q7", "prompt": "Vocabulary from context: The story says Ember could 'dart between the wind like a swallow.' What does 'dart' mean here, and what kind of movement is it describing?", "lines": 3 }
+  ]
+}

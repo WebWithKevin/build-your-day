@@ -1,0 +1,23 @@
+{
+  "kid": "siena",
+  "date": "2026-06-04",
+  "displayDate": "Thursday, June 4, 2026",
+  "subject": "math",
+  "subjectLabel": "Math",
+  "subjectIcon": "➗",
+  "level": "On-level",
+  "theme": "How to Train Your Dragon",
+  "instructions": "Take your time and show your work. Do the warm-up problems first, then the dragon word problems. If one feels tricky, take a breath and try a smaller step — you've got this!",
+  "questions": [
+    { "id": "q1", "prompt": "Warm-up: 3/4 + 1/6 =", "lines": 1 },
+    { "id": "q2", "prompt": "Warm-up: 5/6 − 1/3 =", "lines": 1 },
+    { "id": "q3", "prompt": "Warm-up: 2/3 × 3/5 =", "lines": 1 },
+    { "id": "q4", "prompt": "Warm-up: 4.5 + 3.75 =", "lines": 1 },
+    { "id": "q5", "prompt": "Warm-up: 6.2 − 1.85 =", "lines": 1 },
+    { "id": "q6", "prompt": "Warm-up: 1/2 × 8 =", "lines": 1 },
+    { "id": "q7", "prompt": "Dragon problem: A young trainer feeds her dragon 3/4 of a barrel of fish in the morning and 2/3 of a barrel at night. How many barrels does the dragon eat in one day? (Write your answer as a mixed number.)", "lines": 3 },
+    { "id": "q8", "prompt": "Dragon problem: A dragon flies 4.6 miles to a hidden cove, then takes a longer path 3.85 miles back home. How far did it fly in all?", "lines": 3 },
+    { "id": "q9", "prompt": "Dragon problem: A speedy dragon can fly 12 miles in 1/4 of an hour. At that speed, how far can it fly in a full hour?", "lines": 3 },
+    { "id": "q10", "prompt": "Dragon problem (two steps): The Dragon Academy has 6 baskets of fish, with 2.5 pounds in each basket. (a) How many pounds of fish is that in all? (b) If 3 dragons share it equally, how many pounds does each dragon get?", "lines": 3 }
+  ]
+}
