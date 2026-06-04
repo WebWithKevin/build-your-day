@@ -13,7 +13,7 @@
    ------------------------------------------------------------------------
    👋 DAD: everything you'd want to change lives in the CONFIG block in the
    <script> at the bottom of this file — your email, the kids, and every
-   menu option. You shouldn't need to touch anything up here.
+   menu option.
    ========================================================================= */
 :root{
   --bg:#fff7ec;
@@ -54,6 +54,7 @@ h1{font-family:'Fredoka';font-weight:700;font-size:clamp(2.1rem,7vw,3.2rem);marg
 /* who-are-you */
 .who-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:22px}
 .who-btn{
+  position:relative;
   border:3px solid var(--line);background:var(--card);border-radius:24px;padding:30px 16px;
   font-family:'Fredoka';font-weight:700;font-size:1.6rem;color:var(--ink);cursor:pointer;
   box-shadow:var(--shadow);transition:transform .15s, border-color .15s;
@@ -61,6 +62,30 @@ h1{font-family:'Fredoka';font-weight:700;font-size:clamp(2.1rem,7vw,3.2rem);marg
 .who-btn .emoji{display:block;font-size:2.6rem;margin-bottom:6px}
 .who-btn:hover{transform:translateY(-4px) rotate(-1deg);border-color:var(--coral)}
 .who-btn:active{transform:scale(.97)}
+.who-btn .ready-flag{
+  position:absolute;top:-10px;right:-8px;background:var(--teal);color:#fff;
+  font-family:'Nunito';font-weight:800;font-size:.7rem;letter-spacing:.05em;
+  padding:4px 9px;border-radius:999px;box-shadow:0 3px 8px rgba(31,181,163,.4);
+  display:none;
+}
+.who-btn.has-plan .ready-flag{display:inline-block}
+
+/* fork screen (View / Build) */
+.fork-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:22px}
+.fork-btn{
+  border:3px solid var(--line);background:var(--card);border-radius:24px;padding:28px 18px;
+  font-family:'Fredoka';font-weight:700;font-size:1.3rem;color:var(--ink);cursor:pointer;
+  box-shadow:var(--shadow);text-align:center;
+  display:flex;flex-direction:column;gap:6px;align-items:center;
+  transition:transform .15s, border-color .15s;
+}
+.fork-btn:hover{transform:translateY(-4px) rotate(-1deg);border-color:var(--coral)}
+.fork-btn:active{transform:scale(.97)}
+.fork-btn .fork-emoji{font-size:2.4rem;margin-bottom:2px}
+.fork-btn .fork-sub{font-family:'Nunito';font-weight:700;font-size:.85rem;color:var(--soft)}
+.fork-btn.primary{background:var(--teal);color:#fff;border-color:var(--teal)}
+.fork-btn.primary .fork-sub{color:rgba(255,255,255,.9)}
+@media (max-width:480px){.fork-grid{grid-template-columns:1fr}}
 
 /* build screen */
 .greet{font-family:'Fredoka';font-weight:600;font-size:1.4rem;margin:6px 0 2px}
@@ -93,6 +118,14 @@ h1{font-family:'Fredoka';font-weight:700;font-size:clamp(2.1rem,7vw,3.2rem);marg
 .opt.sel::after{content:"✓";position:absolute;top:-9px;right:-9px;background:var(--coral);color:#fff;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font-weight:900;box-shadow:0 3px 8px rgba(0,0,0,.18)}
 .opt.locked-out{opacity:.4;pointer-events:none}
 
+/* theme section */
+.theme-section input{
+  width:100%;padding:13px 16px;font-size:1rem;font-family:'Nunito';font-weight:700;
+  border:2.5px solid var(--line);border-radius:14px;background:#fffdf8;color:var(--ink);
+}
+.theme-section input:focus{outline:none;border-color:var(--teal)}
+.theme-section input::placeholder{color:#b9aa92;font-weight:600}
+
 /* footer action */
 .cta-bar{position:sticky;bottom:14px;margin-top:24px;text-align:center}
 .btn{
@@ -105,10 +138,12 @@ h1{font-family:'Fredoka';font-weight:700;font-size:clamp(2.1rem,7vw,3.2rem);marg
 .btn[disabled]{background:#d9cab3;box-shadow:none;cursor:not-allowed;transform:none}
 .btn.ghost{background:#fff;color:var(--ink);border:2.5px solid var(--line);box-shadow:var(--shadow)}
 .btn.teal{background:var(--teal);box-shadow:0 10px 24px rgba(31,181,163,.4)}
+.btn.grape{background:var(--grape);box-shadow:0 10px 24px rgba(123,108,246,.4)}
 .btn-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
 
 /* plan screen */
 .plan-card{background:var(--card);border:2px solid var(--line);border-radius:24px;padding:8px 6px;box-shadow:var(--shadow);margin-top:14px;overflow:hidden}
+.plan-theme{padding:10px 16px;border-bottom:2px dashed var(--line);font-weight:800;color:#5a4300;background:#fffbe9;display:flex;align-items:center;gap:8px}
 .step{display:flex;gap:14px;align-items:flex-start;padding:14px 16px;border-bottom:2px solid var(--line)}
 .step:last-child{border-bottom:none}
 .step .num{flex:none;width:30px;height:30px;border-radius:50%;background:var(--grape);color:#fff;font-family:'Fredoka';font-weight:700;display:grid;place-items:center;font-size:.95rem}
@@ -137,18 +172,50 @@ h1{font-family:'Fredoka';font-weight:700;font-size:clamp(2.1rem,7vw,3.2rem);marg
     <div class="who-grid" id="who-grid"></div>
   </section>
 
-  <!-- SCREEN 2: build -->
+  <!-- SCREEN 2: fork — view today's plan or build a new one -->
+  <section class="screen" id="screen-fork">
+    <div class="greet" id="fork-greet"></div>
+    <p class="sub">What do you want to do?</p>
+    <div class="fork-grid">
+      <button class="fork-btn primary" id="fork-view-btn">
+        <span class="fork-emoji">📅</span>
+        View today's plan
+        <span class="fork-sub">Your day is ready — let's see it</span>
+      </button>
+      <button class="fork-btn" id="fork-build-btn">
+        <span class="fork-emoji">✨</span>
+        Build a new day
+        <span class="fork-sub">Pick fresh activities</span>
+      </button>
+    </div>
+    <div class="cta-bar" style="margin-top:30px">
+      <button class="btn ghost" id="fork-back">← Back</button>
+    </div>
+  </section>
+
+  <!-- SCREEN 3: build -->
   <section class="screen" id="screen-build">
     <div class="greet" id="greet"></div>
     <p class="sub">Pick the things below to build your day. Some things are always included!</p>
+    <div class="cta-bar" style="position:static;margin:0 0 16px;text-align:left">
+      <button class="btn grape" id="surprise" type="button">🎲 Surprise me!</button>
+    </div>
     <div class="locked" id="locked"></div>
     <div id="sections"></div>
+
+    <!-- theme input -->
+    <div class="section theme-section">
+      <h2>🎨 What's today's theme?</h2>
+      <p class="hint">Optional — pick something you're into right now. Dad will work it into your reading and word problems!</p>
+      <input type="text" id="theme-input" placeholder="e.g. Pokemon, soccer, robots, dinosaurs, Minecraft…" autocomplete="off" />
+    </div>
+
     <div class="cta-bar">
       <button class="btn" id="finish" disabled>Finish my day 🎉</button>
     </div>
   </section>
 
-  <!-- SCREEN 3: plan -->
+  <!-- SCREEN 4: plan -->
   <section class="screen" id="screen-plan">
     <div class="greet" id="plan-greet"></div>
     <p class="sub">Here's your plan! Send it to Dad so he can help you get going.</p>
@@ -167,13 +234,6 @@ h1{font-family:'Fredoka';font-weight:700;font-size:clamp(2.1rem,7vw,3.2rem);marg
 <script>
 /* =========================================================================
    CONFIG  —  DAD, EDIT THIS PART
-   -------------------------------------------------------------------------
-   • dadEmail  : where "Send my plan to Dad" addresses the email.
-   • kids      : each kid's name + how they like to start the morning
-                 ("activity" or "schoolwork").
-   • Each menu item is either   "Some text"   or   {t:"Text", ic:"🎨"}
-     and may add a link:        {t:"Coding on Scratch", ic:"🧩", url:"https://scratch.mit.edu", lk:"scratch.mit.edu"}
-   • pick: how many a kid chooses from that menu.
    ========================================================================= */
 const CONFIG = {
   dadEmail: "kevin.webwithus+kids@gmail.com",
@@ -183,7 +243,6 @@ const CONFIG = {
     siena: { name:"Siena", emoji:"🌸", startsWith:"schoolwork" }
   },
 
-  // Always included (shown as locked-in chips)
   alwaysIncluded: [
     { t:"Make bed & tidy room", ic:"🛏️" },
     { t:"Breakfast", ic:"🥣" },
@@ -191,14 +250,12 @@ const CONFIG = {
     { t:"Bible time (NKJV)", ic:"📖" }
   ],
 
-  // Schoolwork is included too — Dad can trim today's subjects here.
   schoolwork: [
     { t:"Math", ic:"➗", url:"https://www.khanacademy.org", lk:"Khan Academy" },
     { t:"Reading", ic:"📚", url:"https://www.khanacademy.org", lk:"Khan Academy" },
     { t:"Critical thinking", ic:"🧠" }
   ],
 
-  // Choice menus
   menus: {
     chore:    { title:"Chore", ic:"🧹", pick:1, hint:"Pick 1 job to help out.", items:[
       {t:"Kitchen help (dishes, wipe counters)", ic:"🍽️"},
@@ -252,31 +309,87 @@ const CONFIG = {
   }
 };
 
-/* ===================== app logic (no need to edit) ===================== */
+/* ===================== app logic ===================== */
 const norm = x => typeof x === "string" ? {t:x} : x;
 const $ = s => document.querySelector(s);
 let kidKey = null;
+let todayTheme = "";
 const picks = { chore:[], exercise:[], morning:[], afternoon:[], downtime:[] };
 const order = ["chore","exercise","morning","afternoon","downtime"];
-
+const todayISO = (function(){
+  const d = new Date();
+  return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
+})();
 const dateStr = new Date().toLocaleDateString(undefined,{weekday:"long",month:"long",day:"numeric"});
 $("#today").textContent = dateStr;
 
 // build "who" screen
 const whoGrid = $("#who-grid");
+const kidButtons = {};
 Object.entries(CONFIG.kids).forEach(([k,v])=>{
   const b=document.createElement("button");
   b.className="who-btn";
-  b.innerHTML=`<span class="emoji">${v.emoji||"🙂"}</span>${v.name}`;
-  b.onclick=()=>startBuild(k);
+  b.dataset.kid=k;
+  b.innerHTML=`<span class="ready-flag">Today's plan ready!</span><span class="emoji">${v.emoji||"🙂"}</span>${v.name}`;
+  b.onclick=()=>onKidTap(k);
   whoGrid.appendChild(b);
+  kidButtons[k] = b;
 });
 
-function show(id){document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));$(id).classList.add("active");window.scrollTo({top:0,behavior:"smooth"});}
+// On load, check which kids already have today's JSON ready
+checkTodayPlans();
+
+async function checkTodayPlans(){
+  await Promise.all(Object.keys(CONFIG.kids).map(async k => {
+    try{
+      const res = await fetch(`days/${todayISO}/${k}.json`, {cache:"no-store", method:"HEAD"});
+      if(res.ok){
+        kidButtons[k].classList.add("has-plan");
+      }
+    } catch(e){}
+  }));
+}
+
+function show(id){
+  document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
+  $(id).classList.add("active");
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+async function onKidTap(k){
+  kidKey = k;
+  // Re-check JSON existence at tap time too (in case Dad built it while picker was open)
+  const kid = CONFIG.kids[k];
+  const hasPlan = kidButtons[k].classList.contains("has-plan") || await refreshHasPlan(k);
+  if(hasPlan){
+    showFork(k);
+  } else {
+    startBuild(k);
+  }
+}
+
+async function refreshHasPlan(k){
+  try{
+    const res = await fetch(`days/${todayISO}/${k}.json`, {cache:"no-store", method:"HEAD"});
+    if(res.ok){ kidButtons[k].classList.add("has-plan"); return true; }
+  } catch(e){}
+  return false;
+}
+
+function showFork(k){
+  const kid = CONFIG.kids[k];
+  $("#fork-greet").innerHTML = `Hi ${kid.name}! ${kid.emoji||""}`;
+  $("#fork-view-btn").onclick = () => { window.location.href = `day.html?kid=${k}&date=${todayISO}`; };
+  $("#fork-build-btn").onclick = () => startBuild(k);
+  $("#fork-back").onclick = () => { kidKey=null; show("#screen-who"); };
+  show("#screen-fork");
+}
 
 function startBuild(k){
   kidKey=k;
   order.forEach(o=>picks[o]=[]);
+  todayTheme = "";
+  $("#theme-input").value = "";
   const kid=CONFIG.kids[k];
   $("#greet").textContent=`Hi ${kid.name}! ${kid.emoji||""}`;
   // locked chips
@@ -332,7 +445,32 @@ function checkDone(){
   $("#finish").disabled=!done;
 }
 
-$("#finish").onclick=()=>buildPlan();
+// 🎲 Surprise me — randomly fill every menu
+$("#surprise").onclick = surpriseMe;
+function surpriseMe(){
+  order.forEach(key=>{
+    const m = CONFIG.menus[key];
+    const indices = m.items.map((_,i)=>i);
+    // Fisher-Yates shuffle
+    for(let i=indices.length-1;i>0;i--){
+      const j = Math.floor(Math.random()*(i+1));
+      const tmp = indices[i]; indices[i] = indices[j]; indices[j] = tmp;
+    }
+    picks[key] = indices.slice(0, m.pick);
+    // refresh UI
+    document.querySelectorAll(`#o-${key} .opt`).forEach((o, idx)=>{
+      o.classList.toggle("sel", picks[key].includes(idx));
+    });
+    updateCounter(key);
+    refreshLockouts(key);
+  });
+  checkDone();
+}
+
+$("#finish").onclick=()=>{
+  todayTheme = $("#theme-input").value.trim();
+  buildPlan();
+};
 
 function itemOf(key,idx){return norm(CONFIG.menus[key].items[idx]);}
 
@@ -365,6 +503,12 @@ function buildPlan(){
   // render
   $("#plan-greet").textContent=`${kid.name}'s Day — ${dateStr}`;
   const card=$("#plan-card");card.innerHTML="";
+  if(todayTheme){
+    const themeRow = document.createElement("div");
+    themeRow.className = "plan-theme";
+    themeRow.innerHTML = `🎨 <span>Today's theme: <strong>${escapeHtml(todayTheme)}</strong></span>`;
+    card.appendChild(themeRow);
+  }
   steps.forEach((s,i)=>{
     let extra="";
     if(s.subs){extra=`<div class="d">`+s.subs.map(x=>x.url?`<a href="${x.url}" target="_blank" rel="noopener">${x.t} ↗</a>`:x.t).join(" · ")+`</div>`;}
@@ -380,6 +524,7 @@ function buildPlan(){
 
 function planText(kid,steps){
   let out=`${kid.name}'s Day Plan — ${dateStr}\n\n`;
+  if(todayTheme) out += `🎨 Today's theme: ${todayTheme}\n\n`;
   steps.forEach((s,i)=>{
     out+=`${i+1}. ${s.t}\n`;
     if(s.subs)out+=`   ${s.subs.map(x=>x.url?`${x.t} (${x.url})`:x.t).join(", ")}\n`;
@@ -391,7 +536,8 @@ function planText(kid,steps){
 
 $("#send").onclick=()=>{
   const kid=CONFIG.kids[kidKey];
-  const subject=`${kid.name}'s Day Plan — ${dateStr}`;
+  const themePart = todayTheme ? ` [theme: ${todayTheme}]` : "";
+  const subject=`${kid.name}'s Day Plan — ${dateStr}${themePart}`;
   const url=`mailto:${encodeURIComponent(CONFIG.dadEmail)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(window._planText)}`;
   window.location.href=url;
 };
@@ -401,6 +547,8 @@ $("#copy").onclick=async()=>{
   const t=$("#toast");t.style.display="block";setTimeout(()=>t.style.display="none",2600);
 };
 $("#restart").onclick=()=>{kidKey=null;show("#screen-who");};
+
+function escapeHtml(s){return String(s||"").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
 </script>
 </body>
 </html>
