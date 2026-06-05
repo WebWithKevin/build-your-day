@@ -1,0 +1,34 @@
+{
+  "kid": "gage",
+  "date": "2026-06-05",
+  "displayDate": "Friday, June 5, 2026",
+  "weekNumber": 23,
+  "theme": "My Hero Academia",
+  "dailyGoal": {
+    "headline": "Finish a detailed My Hero Academia drawing I'm proud of.",
+    "explainer": "This means I take my time on one drawing, add real detail, and then show Dad one thing I'm proud of in it. Effort counts more than getting it perfect.",
+    "starterIdea": "Maybe a hero using a clever, low-key power to save the day — what details make the scene feel exciting?"
+  },
+  "anchors": [
+    { "id": "breakfast", "time": "09:00", "endTime": "09:20", "label": "Breakfast", "icon": "🍳", "sharedWith": "family" },
+    { "id": "bible", "time": "09:25", "endTime": "09:45", "label": "Bible time", "icon": "📖", "sharedWith": "Siena", "withDad": true, "meetUrl": "https://meet.google.com/ouv-uywe-gza", "linkLabel": "Join Meet" },
+    { "id": "morning-snack", "time": "10:50", "endTime": "11:00", "label": "Morning snack", "icon": "🍎", "sharedWith": "family" },
+    { "id": "exercise", "time": "12:00", "endTime": "12:30", "label": "Exercise: Run or walk", "icon": "🏃", "sharedWith": "Siena" },
+    { "id": "lunch", "time": "12:30", "endTime": "13:00", "label": "Lunch", "icon": "🥪", "sharedWith": "family" },
+    { "id": "afternoon-snack", "time": "14:30", "endTime": "14:40", "label": "Afternoon snack", "icon": "🧀", "sharedWith": "family" },
+    { "id": "dinner", "time": "17:30", "endTime": "18:00", "label": "Dinner", "icon": "🍽️", "sharedWith": "family" },
+    { "id": "wrapup", "time": "18:00", "endTime": "18:15", "label": "Wrap-up with Dad", "icon": "✅", "withDad": true }
+  ],
+  "workItems": [
+    { "id": "imaginative-play", "label": "Imaginative play", "icon": "🎭", "estimatedTime": "30 min", "isDailyGoal": false },
+    { "id": "drawing", "label": "Drawing / painting (today's goal!)", "icon": "🎨", "estimatedTime": "30 min", "isDailyGoal": true },
+    { "id": "math", "label": "Math", "icon": "➗", "link": "https://www.khanacademy.org", "linkLabel": "Khan Academy", "estimatedTime": "25 min", "isDailyGoal": false },
+    { "id": "reading", "label": "Reading", "icon": "📚", "link": "https://www.khanacademy.org", "linkLabel": "Khan Academy", "estimatedTime": "25 min", "isDailyGoal": false },
+    { "id": "critical-thinking", "label": "Brain Workout (Critical Thinking)", "icon": "🧠", "link": "worksheet.html?kid=gage&date=2026-06-05&subject=critical-thinking", "linkLabel": "Open worksheet", "estimatedTime": "20 min", "isDailyGoal": false },
+    { "id": "chore", "label": "Chore: Lawn / yard help (with Dad)", "icon": "🌿", "withDad": true, "estimatedTime": "20 min", "isDailyGoal": false },
+    { "id": "story", "label": "Write or draw a story", "icon": "✍️", "estimatedTime": "25 min", "isDailyGoal": false },
+    { "id": "read-book", "label": "Read or listen to a book", "icon": "📖", "estimatedTime": "25 min", "isDailyGoal": false },
+    { "id": "downtime", "label": "Downtime: Watch a movie (a movie report = bonus reward!)", "icon": "🎬", "estimatedTime": "open", "isDailyGoal": false }
+  ],
+  "wrapUp": { "dadSignature": true }
+}

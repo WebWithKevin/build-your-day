@@ -1,0 +1,24 @@
+{
+  "kid": "gage",
+  "date": "2026-06-05",
+  "displayDate": "Friday, June 5, 2026",
+  "subject": "reading",
+  "subjectLabel": "Reading",
+  "subjectIcon": "📚",
+  "level": "On-level (6th)",
+  "theme": "My Hero Academia",
+  "instructions": "Read the story once for the action, then again for the details. Answer in your own words — there's room to think. For the 'what do you think' questions, just explain your reasoning.",
+  "passage": {
+    "title": "The Weakest Quirk",
+    "text": "At Crestfield Hero Academy, everybody knew Dani had the weakest Quirk in the whole first-year class. While other students could lift trucks or shoot bolts of light, Dani's power was small and strange: she could make any small object she touched glow softly for exactly one minute. That was it. No strength. No speed. Just a quiet, one-minute light.\n\nThe other trainees were kind, mostly, but nobody picked Dani first for team drills. She didn't mind as much as they expected. While they practiced their flashy powers, Dani practiced something else: paying attention. She memorized the training course. She learned which hallways echoed and which vents carried a draft. She noticed things.\n\nThen came the blackout drill. The instructors cut every light in the underground course and filled it with fog, and the rule was simple: get your whole team to the exit. Powerful Quirks suddenly meant nothing. Students who could punch through walls stumbled in the dark, lost and shouting over each other.\n\nDani stayed calm. She touched a coin and set it glowing, then rolled it down the corridor she'd memorized. One minute of light, just enough to show the way. When it faded, she lit another, and another, leaving a trail of soft glowing markers her whole team could follow. They reached the exit first — all of them, together.\n\nAfterward, the instructor asked how she'd done it. Dani shrugged. \"My Quirk isn't strong,\" she said. \"So I had to know everything else really well.\" The instructor smiled and wrote something in her notebook. It said: Greatest strength — not her Quirk. Her head."
+  },
+  "questions": [
+    { "id": "q1", "prompt": "What exactly is Dani's Quirk, and why did the other students think it was weak?", "lines": 3 },
+    { "id": "q2", "prompt": "Instead of practicing a flashy power, what did Dani practice? Give two specific examples from the story.", "lines": 3 },
+    { "id": "q3", "prompt": "Explain HOW Dani got her team to the exit during the blackout drill. Support your answer with details from the text.", "lines": 5 },
+    { "id": "q4", "prompt": "The instructor wrote 'Greatest strength — not her Quirk. Her head.' What do you think that means, and do you agree? Explain.", "lines": 5 },
+    { "id": "q5", "prompt": "What is the central idea (the main message) of this story? Explain in 2–3 sentences.", "lines": 5 },
+    { "id": "q6", "prompt": "Vocabulary from context: What does 'memorized' mean in the sentence 'She memorized the training course'?", "lines": 2 },
+    { "id": "q7", "prompt": "Why do you think the powerful students struggled in the blackout while Dani did not? What does that suggest about what makes someone a good hero?", "lines": 5 }
+  ]
+}

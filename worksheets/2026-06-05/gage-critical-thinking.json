@@ -1,0 +1,19 @@
+{
+  "kid": "gage",
+  "date": "2026-06-05",
+  "displayDate": "Friday, June 5, 2026",
+  "subject": "critical-thinking",
+  "subjectLabel": "Brain Workout",
+  "subjectIcon": "🧠",
+  "level": "On-level (6th)",
+  "theme": "My Hero Academia",
+  "instructions": "Puzzles to think through, not a test. Take your time and explain HOW you figured each one out — your reasoning matters more than speed. Stuck? Skip ahead and circle back.",
+  "questions": [
+    { "id": "q1", "prompt": "Pattern: A trainee's score climbs: 3, 6, 12, 24, ___, ___. What are the next two numbers, and what is the rule?", "lines": 3 },
+    { "id": "q2", "prompt": "Pattern: 2, 5, 10, 17, 26, ___. What comes next, and what is the rule? (Hint: look at how much is added each time.)", "lines": 3 },
+    { "id": "q3", "prompt": "Logic grid: Three trainees — Dani, Ravi, and Tess — have different Quirks: Glow, Speed, and Strength. (1) Tess can lift a car. (2) Ravi's Quirk is NOT glowing. (3) Dani is not the fastest. Who has which Quirk? Explain how you know.", "lines": 4 },
+    { "id": "q4", "prompt": "Riddle: I'm not the loudest power or the strongest arm, but in the dark I'm worth more than both. I notice what others miss. What am I? (Think about the Reading story.)", "lines": 2 },
+    { "id": "q5", "prompt": "Strategy: A hero must rescue people on floors 1, 2, and 3 of a building. They start on the ground floor, can only carry 1 person down at a time, and must return to the ground floor to drop each person off. What is the fewest number of times they must climb UP into the building to rescue all 3? Explain.", "lines": 4 },
+    { "id": "q6", "prompt": "Scenario: Your team is losing a training match, and a teammate is getting frustrated and blaming others. You're the calm one right now. What would you do to help the team, and why? (Explain your thinking — there's no single right answer.)", "lines": 5 }
+  ]
+}

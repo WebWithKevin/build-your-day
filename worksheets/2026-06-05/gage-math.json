@@ -1,0 +1,23 @@
+{
+  "kid": "gage",
+  "date": "2026-06-05",
+  "displayDate": "Friday, June 5, 2026",
+  "subject": "math",
+  "subjectLabel": "Math",
+  "subjectIcon": "➗",
+  "level": "On-level (6th)",
+  "theme": "My Hero Academia",
+  "instructions": "Knock out the warm-up first — those are your quick wins. Then take on the hero training problems. Show your steps, and don't sweat the tricky ones; partway is still progress. You've got this.",
+  "questions": [
+    { "id": "q1", "prompt": "Warm-up: 9 × 6 =", "lines": 1 },
+    { "id": "q2", "prompt": "Warm-up: 132 ÷ 11 =", "lines": 1 },
+    { "id": "q3", "prompt": "Warm-up: 2/3 + 1/6 =", "lines": 1 },
+    { "id": "q4", "prompt": "Warm-up: 4.2 + 3.9 =", "lines": 1 },
+    { "id": "q5", "prompt": "Dividing fractions: 2/3 ÷ 1/4 =", "lines": 2 },
+    { "id": "q6", "prompt": "Rate: A hero can rescue 4 people every 5 minutes. At that rate, how many people can they rescue in 20 minutes?", "lines": 2 },
+    { "id": "q7", "prompt": "Percent: A trainee lands 30% of 50 practice punches on target. How many hit the target?", "lines": 2 },
+    { "id": "q8", "prompt": "Decimals: One training weight is 2.5 kg. How much do 4 of them weigh together?", "lines": 2 },
+    { "id": "q9", "prompt": "Word problem: A hero-in-training runs a 1.2 km lap 5 times during practice. How far do they run in all?", "lines": 3 },
+    { "id": "q10", "prompt": "Two-step word problem: A class of 20 students splits into teams of 4. Each team rescues 3 practice dummies. How many dummies are rescued in all?", "lines": 3 }
+  ]
+}
