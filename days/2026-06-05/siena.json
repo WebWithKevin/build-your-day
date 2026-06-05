@@ -1,0 +1,34 @@
+{
+  "kid": "siena",
+  "date": "2026-06-05",
+  "displayDate": "Friday, June 5, 2026",
+  "weekNumber": 23,
+  "theme": "How to Train Your Dragon",
+  "dailyGoal": {
+    "headline": "Learn to play or sing one whole song.",
+    "explainer": "This means I pick a song, practice it, and get all the way through it on my own — even if it's slow or has a few wobbles. Finishing the whole thing is the win!",
+    "starterIdea": "Maybe a song I already love, or a simple dragon-y tune — practice it part by part until I can do the whole thing."
+  },
+  "anchors": [
+    { "id": "breakfast", "time": "09:00", "endTime": "09:20", "label": "Breakfast", "icon": "🍳", "sharedWith": "family" },
+    { "id": "bible", "time": "09:25", "endTime": "09:45", "label": "Bible time", "icon": "📖", "sharedWith": "Gage", "withDad": true, "meetUrl": "https://meet.google.com/ouv-uywe-gza", "linkLabel": "Join Meet" },
+    { "id": "morning-snack", "time": "10:50", "endTime": "11:00", "label": "Morning snack", "icon": "🍎", "sharedWith": "family" },
+    { "id": "exercise", "time": "12:00", "endTime": "12:30", "label": "Exercise: Run or walk", "icon": "🏃‍♀️", "sharedWith": "Gage" },
+    { "id": "lunch", "time": "12:30", "endTime": "13:00", "label": "Lunch", "icon": "🥪", "sharedWith": "family" },
+    { "id": "afternoon-snack", "time": "14:30", "endTime": "14:40", "label": "Afternoon snack", "icon": "🧀", "sharedWith": "family" },
+    { "id": "dinner", "time": "17:30", "endTime": "18:00", "label": "Dinner", "icon": "🍽️", "sharedWith": "family" },
+    { "id": "wrapup", "time": "18:00", "endTime": "18:15", "label": "Wrap-up with Dad", "icon": "✅", "withDad": true }
+  ],
+  "workItems": [
+    { "id": "math", "label": "Math", "icon": "➗", "link": "https://www.khanacademy.org", "linkLabel": "Khan Academy", "estimatedTime": "25 min", "isDailyGoal": false },
+    { "id": "reading", "label": "Reading", "icon": "📚", "link": "https://www.khanacademy.org", "linkLabel": "Khan Academy", "estimatedTime": "25 min", "isDailyGoal": false },
+    { "id": "critical-thinking", "label": "Brain Workout (Critical Thinking)", "icon": "🧠", "link": "worksheet.html?kid=siena&date=2026-06-05&subject=critical-thinking", "linkLabel": "Open worksheet", "estimatedTime": "20 min", "isDailyGoal": false },
+    { "id": "music", "label": "Music / learn a song (today's goal!)", "icon": "🎵", "estimatedTime": "25 min", "isDailyGoal": true },
+    { "id": "obstacle-course", "label": "Build an obstacle course", "icon": "🏃", "estimatedTime": "30 min", "isDailyGoal": false },
+    { "id": "story", "label": "Write or draw a story", "icon": "✍️", "estimatedTime": "25 min", "isDailyGoal": false },
+    { "id": "read-book", "label": "Read or listen to a book", "icon": "📖", "estimatedTime": "25 min", "isDailyGoal": false },
+    { "id": "chore", "label": "Chore: Tidy a room", "icon": "🧹", "estimatedTime": "15 min", "isDailyGoal": false },
+    { "id": "downtime", "label": "Downtime: Watch a movie (a movie report = bonus reward!)", "icon": "🎬", "estimatedTime": "open", "isDailyGoal": false }
+  ],
+  "wrapUp": { "dadSignature": true }
+}

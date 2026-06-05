@@ -1,0 +1,24 @@
+{
+  "kid": "siena",
+  "date": "2026-06-05",
+  "displayDate": "Friday, June 5, 2026",
+  "subject": "reading",
+  "subjectLabel": "Reading",
+  "subjectIcon": "📚",
+  "level": "On-level",
+  "theme": "How to Train Your Dragon",
+  "instructions": "Read the story twice — once for fun, once to notice the details. Then answer in your own words. For the 'what do you think' questions, just explain your idea.",
+  "passage": {
+    "title": "The Lost Egg",
+    "text": "Wren found the egg wedged between two rocks at the edge of the tide pools, half-buried in cold sand. It was speckled blue and silver, and it was shivering — or maybe that was just the wind. Her dragon, Pebble, nudged it gently with his snout and made a low, worried hum.\n\n\"Somebody lost you,\" Wren whispered. She knew that if an egg got too cold before it hatched, it would never wake up. The nearest dragon nests were high on the cliffs, a long climb away, and a storm was already darkening the sky to the west.\n\nPebble couldn't fly well in strong wind — he was still young, and his wings tired quickly. But he could climb. So Wren tucked the egg inside her coat to keep it warm against her chest, and together they began to climb. The rain started before they were halfway up. Wren's fingers went numb on the wet stone, and twice she almost slipped, but each time Pebble braced himself beneath her like a living step.\n\nWhen they finally reached the cliff nests, a great silver dragon swept down out of the storm. Wren froze, afraid. But the dragon only lowered her head, took the egg ever so carefully in her jaws, and settled it into a warm nest of feathers and moss. Then she looked at Wren for a long moment, and dipped her wings — the way dragons say thank you.\n\nWren and Pebble climbed back down in the rain, soaked and shivering and grinning the whole way."
+  },
+  "questions": [
+    { "id": "q1", "prompt": "Where exactly did Wren find the egg?", "lines": 2 },
+    { "id": "q2", "prompt": "Why was Wren worried about getting the egg back to a nest quickly? Name TWO reasons from the story.", "lines": 3 },
+    { "id": "q3", "prompt": "Pebble couldn't fly well in the storm. How did he help Wren get up the cliff instead? Support your answer with the text.", "lines": 5 },
+    { "id": "q4", "prompt": "Why do you think Wren was 'grinning the whole way' back down, even though she was soaked and shivering? Explain your idea.", "lines": 5 },
+    { "id": "q5", "prompt": "What do you think the author wants you to learn from this story? (What is the main message?)", "lines": 5 },
+    { "id": "q6", "prompt": "Vocabulary from context: What does the word 'braced' mean in the sentence 'Pebble braced himself beneath her like a living step'?", "lines": 3 },
+    { "id": "q7", "prompt": "The story says the silver dragon 'dipped her wings — the way dragons say thank you.' Why do you think the author explained the wing-dip that way instead of just saying 'thank you'?", "lines": 3 }
+  ]
+}

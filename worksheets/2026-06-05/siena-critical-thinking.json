@@ -1,0 +1,19 @@
+{
+  "kid": "siena",
+  "date": "2026-06-05",
+  "displayDate": "Friday, June 5, 2026",
+  "subject": "critical-thinking",
+  "subjectLabel": "Brain Workout",
+  "subjectIcon": "🧠",
+  "level": "On-level",
+  "theme": "How to Train Your Dragon",
+  "instructions": "These are puzzles, not tests — no rush. Think it through, and for the 'why' questions, explain how you figured it out. Stuck for a bit? That's okay. Try your best idea before asking for a hint.",
+  "questions": [
+    { "id": "q1", "prompt": "Pattern: A baby dragon's wingspan grows: 5, 10, 20, 40, ___, ___. What are the next two numbers, and what is the rule?", "lines": 3 },
+    { "id": "q2", "prompt": "Pattern: The eggs hatch in this order of spots: 1, 4, 9, 16, ___. What comes next, and why? (Hint: think about square numbers.)", "lines": 3 },
+    { "id": "q3", "prompt": "Logic: Three dragons — Pebble, Misty, and Spark — have different colors: blue, silver, and gold. Pebble is NOT gold. Misty is silver. What color is each dragon?", "lines": 4 },
+    { "id": "q4", "prompt": "Riddle: I keep an egg alive when the wind turns cold, but I'm not a fire and I'm not a blanket — I'm something a friend can give for free. What am I? (Think about how Wren kept the egg safe.)", "lines": 3 },
+    { "id": "q5", "prompt": "Strategy: Wren must carry 3 eggs up a cliff, but she can only safely hold 1 egg at a time while climbing. Each trip up and back down counts. What is the FEWEST number of trips UP the cliff she needs to get all 3 eggs to the top? Explain.", "lines": 4 },
+    { "id": "q6", "prompt": "Scenario: You find a baby animal that looks lost, but you're not sure if its parent is nearby. What would YOU do, and why? (There's no single right answer — explain your thinking.)", "lines": 5 }
+  ]
+}
