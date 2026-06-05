@@ -5,9 +5,9 @@
   "weekNumber": 23,
   "theme": "My Hero Academia",
   "dailyGoal": {
-    "headline": "Finish a detailed My Hero Academia drawing I'm proud of.",
-    "explainer": "This means I take my time on one drawing, add real detail, and then show Dad one thing I'm proud of in it. Effort counts more than getting it perfect.",
-    "starterIdea": "Maybe a hero using a clever, low-key power to save the day — what details make the scene feel exciting?"
+    "headline": "Finish my whole Math sheet and check my warm-ups.",
+    "explainer": "This means I do every problem on my Math sheet, then go back and double-check my warm-up answers myself before showing Dad. Finishing and checking is the win!",
+    "starterIdea": "Start with the warm-ups for quick wins, then take the hero problems one step at a time."
   },
   "anchors": [
     { "id": "breakfast", "time": "09:00", "endTime": "09:20", "label": "Breakfast", "icon": "🍳", "sharedWith": "family" },
@@ -21,8 +21,8 @@
   ],
   "workItems": [
     { "id": "imaginative-play", "label": "Imaginative play", "icon": "🎭", "estimatedTime": "30 min", "isDailyGoal": false },
-    { "id": "drawing", "label": "Drawing / painting (today's goal!)", "icon": "🎨", "estimatedTime": "30 min", "isDailyGoal": true },
-    { "id": "math", "label": "Math", "icon": "➗", "link": "https://www.khanacademy.org", "linkLabel": "Khan Academy", "estimatedTime": "25 min", "isDailyGoal": false },
+    { "id": "drawing", "label": "Drawing / painting", "icon": "🎨", "estimatedTime": "30 min", "isDailyGoal": false },
+    { "id": "math", "label": "Math (today's goal!)", "icon": "➗", "link": "https://www.khanacademy.org", "linkLabel": "Khan Academy", "estimatedTime": "25 min", "isDailyGoal": true },
     { "id": "reading", "label": "Reading", "icon": "📚", "link": "https://www.khanacademy.org", "linkLabel": "Khan Academy", "estimatedTime": "25 min", "isDailyGoal": false },
     { "id": "critical-thinking", "label": "Brain Workout (Critical Thinking)", "icon": "🧠", "link": "worksheet.html?kid=gage&date=2026-06-05&subject=critical-thinking", "linkLabel": "Open worksheet", "estimatedTime": "20 min", "isDailyGoal": false },
     { "id": "chore", "label": "Chore: Lawn / yard help (with Dad)", "icon": "🌿", "withDad": true, "estimatedTime": "20 min", "isDailyGoal": false },
