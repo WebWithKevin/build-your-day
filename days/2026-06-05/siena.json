@@ -5,9 +5,9 @@
   "weekNumber": 23,
   "theme": "How to Train Your Dragon",
   "dailyGoal": {
-    "headline": "Learn to play or sing one whole song.",
-    "explainer": "This means I pick a song, practice it, and get all the way through it on my own — even if it's slow or has a few wobbles. Finishing the whole thing is the win!",
-    "starterIdea": "Maybe a song I already love, or a simple dragon-y tune — practice it part by part until I can do the whole thing."
+    "headline": "Write or illustrate my own dragon story.",
+    "explainer": "This means I make up my own dragon story with a beginning, a middle, and an end — I can draw it, write it, or both. It's mine, so I get to decide what happens!",
+    "starterIdea": "Maybe a trainer and a dragon who find something lost in a storm... what happens next?"
   },
   "anchors": [
     { "id": "breakfast", "time": "09:00", "endTime": "09:20", "label": "Breakfast", "icon": "🍳", "sharedWith": "family" },
@@ -23,9 +23,9 @@
     { "id": "math", "label": "Math", "icon": "➗", "link": "https://www.khanacademy.org", "linkLabel": "Khan Academy", "estimatedTime": "25 min", "isDailyGoal": false },
     { "id": "reading", "label": "Reading", "icon": "📚", "link": "https://www.khanacademy.org", "linkLabel": "Khan Academy", "estimatedTime": "25 min", "isDailyGoal": false },
     { "id": "critical-thinking", "label": "Brain Workout (Critical Thinking)", "icon": "🧠", "link": "worksheet.html?kid=siena&date=2026-06-05&subject=critical-thinking", "linkLabel": "Open worksheet", "estimatedTime": "20 min", "isDailyGoal": false },
-    { "id": "music", "label": "Music / learn a song (today's goal!)", "icon": "🎵", "estimatedTime": "25 min", "isDailyGoal": true },
+    { "id": "music", "label": "Music / learn a song", "icon": "🎵", "estimatedTime": "25 min", "isDailyGoal": false },
     { "id": "obstacle-course", "label": "Build an obstacle course", "icon": "🏃", "estimatedTime": "30 min", "isDailyGoal": false },
-    { "id": "story", "label": "Write or draw a story", "icon": "✍️", "estimatedTime": "25 min", "isDailyGoal": false },
+    { "id": "story", "label": "Write or draw a dragon story (today's goal!)", "icon": "✍️", "estimatedTime": "25 min", "isDailyGoal": true },
     { "id": "read-book", "label": "Read or listen to a book", "icon": "📖", "estimatedTime": "25 min", "isDailyGoal": false },
     { "id": "chore", "label": "Chore: Tidy a room", "icon": "🧹", "estimatedTime": "15 min", "isDailyGoal": false },
     { "id": "downtime", "label": "Downtime: Watch a movie (a movie report = bonus reward!)", "icon": "🎬", "estimatedTime": "open", "isDailyGoal": false }
